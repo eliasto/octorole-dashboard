@@ -6,8 +6,6 @@ import { ExclamationIcon } from '@heroicons/react/outline'
 import Sidebar from '../partials/Sidebar';
 import Header from '../partials/Header';
 
-import axios from 'axios';
-
 function Settings() {
   const [open, setOpen] = useState(false)
 
@@ -231,7 +229,6 @@ function Settings() {
   );
 
   function deleteServer(){
-    const guildId = localStorage.getItem('guildId');
     localStorage.removeItem('guildId');
     localStorage.removeItem('guildName');
     setIsLoading(false);

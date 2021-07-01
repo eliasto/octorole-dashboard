@@ -1,7 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useEffect, useState } from 'react';
-import { useHistory, useLocation, useParams, Redirect, } from "react-router-dom";
-import logo from '../images/icon-with-text.png'
+import React from 'react';
 
 class Guilds extends React.Component {
 

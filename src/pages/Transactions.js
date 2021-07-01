@@ -5,9 +5,7 @@ import Header from '../partials/Header';
 import List from '../partials/transaction/list';
 import Pagination from '../partials/pagination';
 import Datepicker from '../partials/actions/Datepicker';
-import FilterButton from '../partials/actions/FilterButton';
 import ExportButton from '../partials/actions/ExportButton';
-import axios from 'axios';
 
 
 function Transactions() {

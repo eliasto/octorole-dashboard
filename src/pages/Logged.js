@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 
-import Sidebar from '../partials/Sidebar';
-import Header from '../partials/Header';
-
 function Logged() {
 
     const [isLogged, setIsLogged] = useState(!!localStorage.getItem('jwt'));

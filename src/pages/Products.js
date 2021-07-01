@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from '../partials/Sidebar';
 import Header from '../partials/Header';
 import List from '../partials/product/list';
-import Pagination from '../partials/pagination';
 import axios from 'axios';
 
 

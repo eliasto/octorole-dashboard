@@ -6,7 +6,7 @@ import Pagination from '../pagination';
 
 import Picker from 'emoji-picker-react';
 import axios from 'axios';
-const { toast, snackbar } = require('tailwind-toast')
+const { toast } = require('tailwind-toast')
 
 export default function List(props){
   const [open, setOpen] = useState(false)

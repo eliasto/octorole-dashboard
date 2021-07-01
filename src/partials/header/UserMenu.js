@@ -1,9 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Transition from '../../utils/Transition';
-import fetch from 'node-fetch';
-
-import UserAvatar from '../../images/user-avatar-32.png';
 
 function UserMenu() {
 
