@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Transition from '../../utils/Transition';
+require('dotenv').config();
+
 
 function UserMenu() {
 
@@ -41,7 +43,7 @@ function UserMenu() {
     localStorage.removeItem('discord_avatar');
 
     setIsLogged(false);
-    window.location.href = "http://localhost:3000"
+    window.location.href = "https://"+process.env.SITE_PATH
   };
 
   return (

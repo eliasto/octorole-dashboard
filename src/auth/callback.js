@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import logo from '../images/icon-with-text.png'
+require('dotenv').config();
 
 const Callback = (props) => {
   const [text, setText] = useState('Loading...');
@@ -47,7 +48,7 @@ const Callback = (props) => {
           localStorage.setItem('discord_id', res.id);
           localStorage.setItem('discord_avatar', res.avatar);
           setText('You have been successfully logged in. You will be redirected in a few seconds...');
-          setTimeout(() => window.location.href = 'http://localhost:3000/dashboard', 3000); // Redirect to homepage after 3 sec  
+          setTimeout(() => window.location.href = process.env.SITE_PATH+'/dashboard', 3000); // Redirect to homepage after 3 sec  
       })
       .catch(err => {
         console.log(err);
