@@ -26,37 +26,38 @@ function DashboardCard07() {
 }, []);
 
 var view = [];
+console.log(items)
 var length = items.length;
 if(items.length >=10){
   length = 10;
 }
 
-for(let i = 0;i<length;i++){
-    var d= new Date(items[items.length-i-1].created_at);
-    view.push(
-      <tr>
-            <td className="p-2">
-            <div className="flex items-center bg-indigo-600 rounded-full w-9">
-                <circle fill="#24292E" cx="18" cy="18" r="18" />
-                <span className="p-2">{items[items.length-i-1].product.emoji}</span>
-            </div>
-          </td>
-          <td className="p-2">
-            <div className="text-center">{items[items.length-i-1].product.name}</div>
-          </td>
-          <td className="p-2">
-            <div className="text-center text-green-500">{items[items.length-i-1].product.price} €</div>
-          </td>
-          <td className="p-2">
-            <div className="text-center">{items[items.length-i-1].username}</div>
-          </td>
-          <td className="p-2">
-            <div className="text-center text-indigo-500">{d.toDateString()} {d.getUTCHours()}:{d.getUTCMinutes()}</div>
-          </td>
-        </tr>
-    );
-    }
 
+for(let i = 0;i<length;i++){
+  var d= new Date(items[items.length-i-1].created_at);
+  view.push(
+    <tr>
+          <td className="p-2">
+          <div className="flex items-center bg-indigo-600 rounded-full w-9">
+              <circle fill="#24292E" cx="18" cy="18" r="18" />
+              <span className="p-2">{items[items.length-i-1].product.emoji}</span>
+          </div>
+        </td>
+        <td className="p-2">
+          <div className="text-center">{items[items.length-i-1].product.name}</div>
+        </td>
+        <td className="p-2">
+          <div className="text-center text-green-500">{items[items.length-i-1].product.price} €</div>
+        </td>
+        <td className="p-2">
+          <div className="text-center">{items[items.length-i-1].username}</div>
+        </td>
+        <td className="p-2">
+          <div className="text-center text-indigo-500">{d.toDateString()} {d.getUTCHours()}:{d.getUTCMinutes()}</div>
+        </td>
+      </tr>
+  );
+  }
 
   
   return (
