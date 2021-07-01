@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/jsx-no-comment-textnodes */
 
-export default function Pagination({count, setCount, currentIndex, setCurrentIndex, max}) {
+export default function Pagination({count, setCount, max}) {
   var nextValue = 10*(count+1);
   if(nextValue >= max){
     nextValue = max;
@@ -44,7 +44,7 @@ export default function Pagination({count, setCount, currentIndex, setCurrentInd
         </button>
         <button
           onClick={() => {
-            if(((count)*10)+1<max){
+            if(nextValue <max){
               setCount(count+1);
             }
           }}
