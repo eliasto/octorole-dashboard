@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from "react-router-dom";
 import logo from '../images/icon-with-text.png'
-require('dotenv').config();
+import {apipath, sitepath} from '../config.json'
 
 const Callback = (props) => {
   const [text, setText] = useState('Loading...');
@@ -14,7 +14,7 @@ const Callback = (props) => {
   useEffect(() => {
     // Successfully logged with the provider
     // Now logging with strapi by using the access_token (given by the provider) in props.location.search
-    fetch(`https://api.octorole.eliasto.me/auth/discord/callback${location.search}`)
+    fetch(`${apipath}/auth/discord/callback${location.search}`)
       .then(res => {
         if (res.status !== 200) {
           throw new Error(`Couldn't login to Strapi. Status: ${res.status}`);
@@ -48,7 +48,7 @@ const Callback = (props) => {
           localStorage.setItem('discord_id', res.id);
           localStorage.setItem('discord_avatar', res.avatar);
           setText('You have been successfully logged in. You will be redirected in a few seconds...');
-          setTimeout(() => window.location.href = process.env.SITE_PATH+'/dashboard', 3000); // Redirect to homepage after 3 sec  
+          setTimeout(() => window.location.href = sitepath+'/dashboard', 3000); // Redirect to homepage after 3 sec  
       })
       .catch(err => {
         console.log(err);

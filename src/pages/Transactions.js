@@ -7,6 +7,7 @@ import Pagination from '../partials/pagination';
 import Datepicker from '../partials/actions/Datepicker';
 import ExportButton from '../partials/actions/ExportButton';
 import axios from 'axios';
+import {apipath} from '../config.json';
 
 function Transactions() {
 
@@ -17,7 +18,7 @@ function Transactions() {
 
   useEffect(() => {
     const fetchDatas = async () => {
-      await axios.get(`https://api.octorole.eliasto.me/transactions?server.guildId=${localStorage.getItem('guildId')}`, {
+      await axios.get(`${apipath}/transactions?server.guildId=${localStorage.getItem('guildId')}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
           'Content-Type': 'application/x-www-form-urlencoded'

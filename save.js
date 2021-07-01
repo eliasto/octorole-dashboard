@@ -3,9 +3,12 @@ import { Dialog, Transition } from '@headlessui/react'
 import { EmojiHappyIcon, XIcon, LightBulbIcon } from '@heroicons/react/solid'
 import { ExclamationIcon } from '@heroicons/react/outline'
 import Pagination from '../pagination';
+import {apipath} from './src/config.json'
 
 import Picker from 'emoji-picker-react';
 import axios from 'axios';
+require('dotenv').config();
+
 const { toast, snackbar } = require('tailwind-toast')
 
 export default function List(props){
@@ -614,7 +617,7 @@ export default function List(props){
   );
 
   async function deleteProduct(index){
-    await axios.delete(`https://api.octorole.eliasto.me/products/${data[index].id}` ,{
+    await axios.delete(`${apipath}/products/${data[index].id}` ,{
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
         }})
@@ -641,7 +644,7 @@ export default function List(props){
   }
 
   async function updateForm(value, index){
-    await axios.put(`https://api.octorole.eliasto.me/products/${value.id}`,{
+    await axios.put(`${apipath}/products/${value.id}`,{
       name: formName,
       description: formDescription,
       price: formPrice,
@@ -676,7 +679,7 @@ export default function List(props){
   }
 
   async function setHighlight(index, boolean){
-    await axios.put(`https://api.octorole.eliasto.me/products/${data[index].id}`,{
+    await axios.put(`${apipath}/products/${data[index].id}`,{
       highlight: boolean
     } ,{
         headers: {
@@ -706,7 +709,7 @@ export default function List(props){
       emojiData = chosenEmoji.emoji
     }
     var indexGuildId;
-    await axios.get(`https://api.octorole.eliasto.me/servers?guildId=${localStorage.getItem('guildId')}`,{
+    await axios.get(`${apipath}/servers?guildId=${localStorage.getItem('guildId')}`,{
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -715,7 +718,7 @@ export default function List(props){
           indexGuildId = res.data[0].id;
         }).catch(function (error){
         })
-    await axios.post(`https://api.octorole.eliasto.me/products`,{
+    await axios.post(`${apipath}/products`,{
       name: formName,
       description: formDescription,
       price: formPrice,

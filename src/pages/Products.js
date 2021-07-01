@@ -4,7 +4,7 @@ import Sidebar from '../partials/Sidebar';
 import Header from '../partials/Header';
 import List from '../partials/product/list';
 import axios from 'axios';
-
+import {apipath} from '../config.json';
 
 function Products() {
 
@@ -14,7 +14,7 @@ function Products() {
 
   useEffect(() => {
     const fetchDatas = async () => {
-      await axios.get(`https://api.octorole.eliasto.me/products?server.guildId=${localStorage.getItem('guildId')}`, {
+      await axios.get(`${apipath}/products?server.guildId=${localStorage.getItem('guildId')}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
           'Content-Type': 'application/x-www-form-urlencoded'

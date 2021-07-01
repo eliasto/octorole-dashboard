@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import {apipath} from '../../config.json';
 
 function DashboardCard07() {
   if(localStorage.getItem('jwt') == null){
@@ -10,7 +11,7 @@ function DashboardCard07() {
 
   useEffect(() => {
     const fetchDatas = async () => {
-    axios.get(`https://api.octorole.eliasto.me/transactions?server.guildId=${localStorage.getItem('guildId')}`, {
+    axios.get(`${apipath}/transactions?server.guildId=${localStorage.getItem('guildId')}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -26,7 +27,6 @@ function DashboardCard07() {
 }, []);
 
 var view = [];
-console.log(items)
 var length = items.length;
 if(items.length >=10){
   length = 10;

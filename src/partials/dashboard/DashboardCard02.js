@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import {apipath} from '../../config.json';
 
 // Import utilities
 
@@ -10,7 +11,7 @@ export default class DashboardCard02 extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`https://api.octorole.eliasto.me/products/count?server.guildId=${localStorage.getItem('guildId')}`, {
+    axios.get(`${apipath}/products/count?server.guildId=${localStorage.getItem('guildId')}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
         'Content-Type': 'application/x-www-form-urlencoded'

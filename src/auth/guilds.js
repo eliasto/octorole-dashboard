@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from 'react';
+import {apipath} from '../config.json'
 
 class Guilds extends React.Component {
 
@@ -19,7 +20,7 @@ async checkServer(id, name){
           blocked: true,
       }
   })
-  await fetch(`https://api.octorole.eliasto.me/servers/guild/`+id, {
+  await fetch(`${apipath}/servers/guild/`+id, {
     method: 'get', 
 headers: new Headers({
  'Content-Type': 'application/x-www-form-urlencoded'
@@ -34,7 +35,7 @@ headers: new Headers({
   .then(res => res.json())
   .then(async res => {
     if(res === false){
-      await fetch(`https://api.octorole.eliasto.me/servers/`, {
+      await fetch(`${apipath}/servers/`, {
         method: 'post', 
    headers: new Headers({
      'Authorization': 'Bearer '+localStorage.getItem('jwt'), 

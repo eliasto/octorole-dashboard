@@ -6,6 +6,8 @@ import Pagination from '../pagination';
 
 import Picker from 'emoji-picker-react';
 import axios from 'axios';
+import {apipath} from '../../config.json';
+
 const { toast } = require('tailwind-toast')
 
 export default function List(props){
@@ -621,7 +623,7 @@ if(data.length !== 0){
   );
 
   async function deleteProduct(index){
-    await axios.delete(`https://api.octorole.eliasto.me/products/${data[index].id}` ,{
+    await axios.delete(`${apipath}/products/${data[index].id}` ,{
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
         }})
@@ -648,7 +650,7 @@ if(data.length !== 0){
   }
 
   async function updateForm(value, index){
-    await axios.put(`https://api.octorole.eliasto.me/products/${value.id}`,{
+    await axios.put(`${apipath}/products/${value.id}`,{
       name: formName,
       description: formDescription,
       price: formPrice,
@@ -683,7 +685,7 @@ if(data.length !== 0){
   }
 
   async function setHighlight(index, boolean){
-    await axios.put(`https://api.octorole.eliasto.me/products/${data[index].id}`,{
+    await axios.put(`${apipath}/products/${data[index].id}`,{
       highlight: boolean
     } ,{
         headers: {
@@ -713,7 +715,7 @@ if(data.length !== 0){
       emojiData = chosenEmoji.emoji
     }
     var indexGuildId;
-    await axios.get(`https://api.octorole.eliasto.me/servers?guildId=${localStorage.getItem('guildId')}`,{
+    await axios.get(`${apipath}/servers?guildId=${localStorage.getItem('guildId')}`,{
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -722,7 +724,7 @@ if(data.length !== 0){
           indexGuildId = res.data[0].id;
         }).catch(function (error){
         })
-    await axios.post(`https://api.octorole.eliasto.me/products`,{
+    await axios.post(`${apipath}/products`,{
       name: formName,
       description: formDescription,
       price: formPrice,

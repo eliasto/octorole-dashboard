@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-
+import {sitepath} from '../config.json'
 function Logged() {
 
     const [isLogged, setIsLogged] = useState(!!localStorage.getItem('jwt'));
-
-    const redirectURI = 'https://api.octorole.eliasto.me/connect/discord';
+    const redirectURI = sitepath+'/connect/discord';
 
     if(!isLogged){
       return(
