@@ -64,7 +64,7 @@ function Transactions() {
               )}
             <div className="mt-2">
             {/* Export button */}
-            {(!loading)?<ExportButton data={data}/> : null}            
+            {/*(!loading)?<ExportButton data={data}/> : null*/}            
             </div>
 
           </div>
