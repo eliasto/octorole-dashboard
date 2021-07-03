@@ -15,6 +15,11 @@ function Front() {
 
   const [server, setServer] = useState(0);
   const [member, setMember] = useState(0);
+  const [bannerMessage, setBannerMessage] = useState('');
+  const [bannerMessageShort, setBannerMessageShort] = useState('');
+  const [isBanner, setIsBanner] = useState(false);
+  const [bannerLink, setBannerLink] = useState('');
+  const [buttonMessage, setButtonMessage] = useState('');
 
   useEffect(() => {
     const fetchDatas = async () => {
@@ -26,6 +31,11 @@ function Front() {
           const datas = res.data[0]
           setServer(datas.servers);
           setMember(datas.members);
+          setIsBanner(datas.bannerState);
+          setBannerMessage(datas.bannerMessage);
+          setBannerMessageShort(datas.bannerMessageShort);
+          setBannerLink(datas.bannerLink);
+          setButtonMessage(datas.buttonMessage);
         }).catch(e =>{
           console.log("Une erreur s'est produite lors de la requête: "+e);
         })
@@ -71,9 +81,9 @@ function Front() {
   ]
 
   const footer = [
-    { name: 'CGV', href: '/cgv' },
-    { name: 'CGU', href: '/cgu' },
-    { name: 'Politique de confidentalités', href: '/rgpd' },
+    { name: 'CGV', href: '/legals/cgv' },
+    { name: 'CGU', href: '/legals/cgu' },
+    { name: 'Politique de confidentalités', href: '/legals/rgpd' },
     { name: 'Mentions légales', href: '/legals' },
 
   ]
@@ -293,7 +303,7 @@ function Front() {
     </footer>
          {/* banner */}
 
-      {(bannerOpen)? 
+      {(bannerOpen && isBanner)? 
     <div className="fixed bottom-0 inset-x-0 pb-2 sm:pb-5">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div className="p-2 rounded-lg bg-purple-600 shadow-lg sm:p-3">
@@ -303,16 +313,16 @@ function Front() {
                 <SpeakerphoneIcon className="h-6 w-6 text-white" aria-hidden="true" />
               </span>
               <p className="ml-3 font-medium text-white truncate">
-                <span className="md:hidden">Octorole est disponible !</span>
-                <span className="hidden md:inline">Octorole est enfin disponible ! Rejoignez la version béta et toutes ses exclusivités sur notre serveur Discord.</span>
+                <span className="md:hidden">{bannerMessageShort}</span>
+                <span className="hidden md:inline">{bannerMessage}</span>
               </p>
             </div>
             <div className="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
               <a
-                href="https://discord.octorole.xyz"
+                href={bannerLink}
                 className="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-purple-600 bg-white hover:bg-purple-50"
               >
-                En savoir plus
+                {buttonMessage}
               </a>
             </div>
             <div className="order-2 flex-shrink-0 sm:order-3 sm:ml-2">
