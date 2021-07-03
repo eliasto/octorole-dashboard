@@ -62,9 +62,9 @@ function Help() {
           <div className="text-xs font-semibold text-gray-400 uppercase pt-1.5 pb-2 px-4">Besoin d'aide ?</div>
           <ul>
             <li>
-              <Link
+              <a
                 className="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
-                to="/doc"
+                href="https://doc.octorole.xyz"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
                 <svg className="w-3 h-3 fill-current text-indigo-300 flex-shrink-0 mr-2" viewBox="0 0 12 12">
@@ -72,19 +72,19 @@ function Help() {
                   <path d="M2 0h8v2H2z" />
                 </svg>
                 <span>Documentation</span>
-              </Link>
+              </a>
             </li>
             <li>
-              <Link
+              <a
                 className="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
-                to="/support"
+                href="https://discord.octorole.xyz"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
                 <svg className="w-3 h-3 fill-current text-indigo-300 flex-shrink-0 mr-2" viewBox="0 0 12 12">
                   <path d="M10.5 0h-9A1.5 1.5 0 000 1.5v9A1.5 1.5 0 001.5 12h9a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0010.5 0zM10 7L8.207 5.207l-3 3-1.414-1.414 3-3L5 2h5v5z" />
                 </svg>
                 <span>Support</span>
-              </Link>
+              </a>
             </li>
           </ul>
         </div>
