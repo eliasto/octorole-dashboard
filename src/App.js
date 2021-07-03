@@ -9,16 +9,18 @@ import './css/style.scss';
 
 import { focusHandling } from 'cruip-js-toolkit';
 import './charts/ChartjsConfig';
-
-// Import pages
-import Dashboard from './pages/Dashboard';
-import Transactions from './pages/Transactions';
-import Products from './pages/Products';
-import Settings from './pages/Settings';
 import Callback from './auth/callback'
 import Logged from './pages/Logged';
 import Guilds from './auth/guilds';
 import Home from './pages/Front';
+import Invite from './pages/Invite';
+
+
+// Import pages
+const Dashboard = React.lazy(() => import('./pages/Dashboard'));
+const Transactions = React.lazy(() => import('./pages/Transactions'));
+const Products = React.lazy(() => import('./pages/Products'));
+const Settings = React.lazy(() => import('./pages/Settings'));
 
 function App() {
 
@@ -33,9 +35,7 @@ function App() {
     focusHandling('outline');
   }, [location.pathname]); // triggered on route change
 
-  {/*if(location.pathname === '/'){
-    return <Redirect to="/dashboard" />
-  }*/}
+  
   if(!isLogged && location.pathname !== '/auth/callback' && location.pathname.split('/')[1] === 'dashboard'){
     return <Logged />;
   }
@@ -52,6 +52,9 @@ function App() {
         </Route>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route exact path="/invite">
+          <Invite />
         </Route>
         <Route exact path="/dashboard/transactions">
           <Transactions />
