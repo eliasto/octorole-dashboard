@@ -9,18 +9,19 @@ import './css/style.scss';
 
 import { focusHandling } from 'cruip-js-toolkit';
 import './charts/ChartjsConfig';
-import Callback from './auth/callback'
-import Logged from './pages/Logged';
-import Guilds from './auth/guilds';
-import Home from './pages/Front';
-import Invite from './pages/Invite';
-
 
 // Import pages
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
 const Transactions = React.lazy(() => import('./pages/Transactions'));
 const Products = React.lazy(() => import('./pages/Products'));
 const Settings = React.lazy(() => import('./pages/Settings'));
+const Invite = React.lazy(() => import('./pages/Invite'));
+const Home = React.lazy(() => import('./pages/Front'));
+const Logged = React.lazy(() => import('./pages/Logged'));
+const Guilds = React.lazy(() => import('./auth/guilds'));
+const Callback = React.lazy(() => import('./auth/callback'));
+
+
 
 function App() {
 
@@ -35,7 +36,7 @@ function App() {
     focusHandling('outline');
   }, [location.pathname]); // triggered on route change
 
-  
+
   if(!isLogged && location.pathname !== '/auth/callback' && location.pathname.split('/')[1] === 'dashboard'){
     return <Logged />;
   }
