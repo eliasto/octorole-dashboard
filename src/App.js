@@ -36,10 +36,6 @@ function App() {
     focusHandling('outline');
   }, [location.pathname]); // triggered on route change
 
-  if(window.location.href.split('/')[2] === 'discord.octorole.xyz' || window.location.href.split('/')[2] === 'www.discord.octorole.xyz' || window.location.href.split('/')[2] === 'discord.octorole.xyz/' || window.location.href.split('/')[2] === 'www.discord.octorole.xyz/'){
-    window.location.href = "https://discord.gg/eFXfKHXnWc";
-  }
-
   if(!isLogged && location.pathname !== '/auth/callback' && location.pathname.split('/')[1] === 'dashboard'){
     return <Logged />;
   }
