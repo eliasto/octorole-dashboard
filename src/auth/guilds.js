@@ -7,7 +7,7 @@ class Guilds extends React.Component {
   constructor(props) {
     super(props);
     if(localStorage.getItem('jwt') == null){
-        window.location.href = "/";
+        window.location.href = "/dashboard";
     }
     this.state = { items: [], loading: true, blocked: false };
 }

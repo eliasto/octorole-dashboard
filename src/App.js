@@ -18,6 +18,7 @@ import Settings from './pages/Settings';
 import Callback from './auth/callback'
 import Logged from './pages/Logged';
 import Guilds from './auth/guilds';
+import Home from './pages/Front';
 
 function App() {
 
@@ -32,9 +33,9 @@ function App() {
     focusHandling('outline');
   }, [location.pathname]); // triggered on route change
 
-  if(location.pathname === '/'){
+  {/*if(location.pathname === '/'){
     return <Redirect to="/dashboard" />
-  }
+  }*/}
   if(!isLogged && location.pathname !== '/auth/callback' && location.pathname.split('/')[1] === 'dashboard'){
     return <Logged />;
   }
@@ -46,8 +47,11 @@ function App() {
 
   return (
       <Switch>
-            <Route exact path="/dashboard">
+        <Route exact path="/dashboard">
           <Dashboard />
+        </Route>
+        <Route exact path="/">
+          <Home />
         </Route>
         <Route exact path="/dashboard/transactions">
           <Transactions />
