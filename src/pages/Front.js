@@ -76,7 +76,7 @@ function Front() {
 
   const navigation = [
     { name: 'Documentation', href: 'https://doc.octorole.xyz' },
-    { name: 'Serveur Discord officiel', href: 'https://discord.octorole.xyz' },
+    { name: 'Serveur Discord officiel', href: 'https://octorole.xyz/discord' },
     { name: 'Status', href: 'https://status.octorole.xyz' },
   ]
 

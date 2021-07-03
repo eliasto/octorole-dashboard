@@ -15,7 +15,7 @@ const Dashboard = React.lazy(() => import('./pages/Dashboard'));
 const Transactions = React.lazy(() => import('./pages/Transactions'));
 const Products = React.lazy(() => import('./pages/Products'));
 const Settings = React.lazy(() => import('./pages/Settings'));
-const Invite = React.lazy(() => import('./pages/Invite'));
+const RedirectPath = React.lazy(() => import('./pages/RedirectPath'));
 const Home = React.lazy(() => import('./pages/Front'));
 const Logged = React.lazy(() => import('./pages/Logged'));
 const Guilds = React.lazy(() => import('./auth/guilds'));
@@ -54,7 +54,10 @@ function App() {
           <Home />
         </Route>
         <Route exact path="/invite">
-          <Invite />
+          <RedirectPath to="https://discord.com/api/oauth2/authorize?client_id=853931435190386699&permissions=268790784&scope=bot" />
+        </Route>
+        <Route exact path="/discord">
+          <RedirectPath to="https://discord.gg/eFXfKHXnWc" />
         </Route>
         <Route exact path="/dashboard/transactions">
           <Transactions />

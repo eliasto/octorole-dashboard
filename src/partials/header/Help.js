@@ -77,7 +77,7 @@ function Help() {
             <li>
               <a
                 className="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
-                href="https://discord.octorole.xyz"
+                href="https://octorole.xyz/discord"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
                 <svg className="w-3 h-3 fill-current text-indigo-300 flex-shrink-0 mr-2" viewBox="0 0 12 12">
