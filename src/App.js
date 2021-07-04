@@ -22,6 +22,7 @@ const Guilds = React.lazy(() => import('./auth/guilds'));
 const Callback = React.lazy(() => import('./auth/callback'));
 const Server = React.lazy(() => import('./shop/server'));
 const Product = React.lazy(() => import('./shop/product'));
+const Auth = React.lazy(() => import('./shop/auth'));
 
 function App() {
 
@@ -76,7 +77,10 @@ function App() {
         </Route> 
         <Route exact path="/auth/callback">
           <Callback />
-        </Route>   
+        </Route>  
+        <Route exact path="/shop/auth">
+          <Auth />
+        </Route> 
         <Route exact path="/auth/guilds">
           <Guilds />
         </Route>
