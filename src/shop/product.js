@@ -37,6 +37,7 @@ function Product() {
 
     function connectDiscord(){
       localStorage.setItem('productId', id);
+      localStorage.setItem('buyingProcess', true);
       window.location.href = apipath+'/connect/discord';
     }
 

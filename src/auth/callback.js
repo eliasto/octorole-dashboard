@@ -25,8 +25,10 @@ const Callback = (props) => {
       .then(res => {
         // Successfully logged with Strapi
         // Now saving the jwt to use it for future authenticated requests to Strapi
+        if(localStorage.getItem('productId') == null){
         localStorage.setItem('jwt', res.jwt);
         localStorage.setItem('username', res.user.username);
+        }
         localStorage.setItem('discord_token', parameters.get('access_token'))
         fetch(`https://discord.com/api/users/@me`,{
           method: 'get', 
@@ -49,7 +51,7 @@ const Callback = (props) => {
             localStorage.setItem('discord_client_name', res.username+'#'+res.discriminator);
             localStorage.setItem('discord_client_id', res.id);
             setText('Vous êtes désormais connecté. Redirection dans quelques secondes...');  
-            setTimeout(() => window.location.href = sitepath+'/product'+localStorage.getItem('productId'), 3000); // Redirect to homepage after 3 sec   
+            setTimeout(() => window.location.href = sitepath+'/product/'+localStorage.getItem('productId'), 3000); // Redirect to homepage after 3 sec   
           }else{
             localStorage.setItem('discord_id', res.id);
             localStorage.setItem('discord_avatar', res.avatar);
