@@ -46,8 +46,10 @@ const Callback = (props) => {
         // Successfully logged with Strapi
         // Now saving the jwt to use it for future authenticated requests to Strapi
           if(localStorage.getItem('productId') != null){
-            localStorage.setItem('discord_client_name', res.username+'#'+res.identifier);
+            localStorage.setItem('discord_client_name', res.username+'#'+res.discriminator);
             localStorage.setItem('discord_client_id', res.id);
+            setText('Vous êtes désormais connecté. Redirection dans quelques secondes...');  
+            setTimeout(() => window.location.href = sitepath+'/product'+localStorage.getItem('productId'), 3000); // Redirect to homepage after 3 sec   
           }else{
             localStorage.setItem('discord_id', res.id);
             localStorage.setItem('discord_avatar', res.avatar);
@@ -73,7 +75,7 @@ const Callback = (props) => {
     </div>
     <div className="absolute inset-x-0 bottom-0 h-40">
       <center>
-      <img src={logo} className="w-40 h-40"></img>
+      {/*<img src={logo} className="w-40 h-40"></img>*/}
       </center>
       </div>
       </div>)
