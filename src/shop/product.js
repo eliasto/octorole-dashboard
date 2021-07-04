@@ -13,6 +13,11 @@ function Product() {
     const location = useLocation();
     const id = location.pathname.split('/')[2];  
 
+    if(localStorage.getItem('discord_client_id') != null && localStorage.getItem('discord_client_name')){
+      setDiscord(true);
+      localStorage.removeItem('productId');
+    }
+
     useEffect(() => {
         const fetchDatas = async () => {
           await axios.get(`${apipath}/products/info/${id}`, {
@@ -32,7 +37,7 @@ function Product() {
 
     function connectDiscord(){
       localStorage.setItem('productId', id);
-      window.location.href = 'https://discord.com/api/oauth2/authorize?client_id=853931435190386699&redirect_uri=https%3A%2F%2Foctorole.xyz%2Fshop%2Fauth&response_type=code&scope=identify';
+      window.location.href = apipath+'/connect/discord';
     }
 
     function disconnect(){

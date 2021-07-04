@@ -45,10 +45,15 @@ const Callback = (props) => {
       .then(res => {
         // Successfully logged with Strapi
         // Now saving the jwt to use it for future authenticated requests to Strapi
-          localStorage.setItem('discord_id', res.id);
-          localStorage.setItem('discord_avatar', res.avatar);
-          setText('Vous êtes désormais connecté. Redirection dans quelques secondes...');
-          setTimeout(() => window.location.href = sitepath+'/dashboard', 3000); // Redirect to homepage after 3 sec  
+          if(localStorage.getItem('productId') != null){
+            localStorage.setItem('discord_client_name', res.username+'#'+res.identifier);
+            localStorage.setItem('discord_client_id', res.id);
+          }else{
+            localStorage.setItem('discord_id', res.id);
+            localStorage.setItem('discord_avatar', res.avatar);
+            setText('Vous êtes désormais connecté. Redirection dans quelques secondes...');  
+          setTimeout(() => window.location.href = sitepath+'/dashboard', 3000); // Redirect to homepage after 3 sec 
+          } 
       })
       .catch(err => {
         console.log(err);
