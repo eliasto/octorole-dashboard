@@ -43,6 +43,7 @@ function Product() {
     function disconnect(){
       localStorage.removeItem('discord_client_id');
       localStorage.removeItem('discord_client_name');
+      localStorage.removeItem('buyingProcess');
       setDiscord(false);
     }
 
@@ -52,7 +53,7 @@ function Product() {
         <div className="bg-gray-900 absolute top-1/2 px-5 -translate-y-1/2 xs:top-1/2 xs:left-1/2 transform xs:-translate-x-1/2 xs:-translate-y-1/2">
         <div class="max-w-md py-4 m-auto px-8 bg-white shadow-lg rounded-lg">
   <div class="flex justify-center -mt-16">
-    <img class="w-20 h-20 object-cover rounded-full border-2 border-white" src="https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"></img>
+    <span className="bg-purple-600 w-20 h-20 text-center rounded-full text-4xl border-4 border-white py-3 m-auto">{data.emoji}</span>
   </div>
   <div>
     <h2 class="text-gray-800 text-3xl font-semibold text-center">{data.name}</h2>

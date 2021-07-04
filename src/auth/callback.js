@@ -50,6 +50,7 @@ const Callback = (props) => {
           if(localStorage.getItem('productId') != null){
             localStorage.setItem('discord_client_name', res.username+'#'+res.discriminator);
             localStorage.setItem('discord_client_id', res.id);
+            localStorage.removeItem('discord_token');
             setText('Vous êtes désormais connecté. Redirection dans quelques secondes...');  
             setTimeout(() => window.location.href = sitepath+'/product/'+localStorage.getItem('productId'), 3000); // Redirect to homepage after 3 sec   
           }else{
