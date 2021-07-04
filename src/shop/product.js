@@ -13,11 +13,6 @@ function Product() {
     const location = useLocation();
     const id = location.pathname.split('/')[2];  
 
-    if(localStorage.getItem('discord_client_id') != null && localStorage.getItem('discord_client_name')){
-      setDiscord(true);
-      localStorage.removeItem('productId');
-    }
-
     useEffect(() => {
         const fetchDatas = async () => {
           await axios.get(`${apipath}/products/info/${id}`, {
@@ -32,7 +27,11 @@ function Product() {
               window.location.href = 'https://octorole.xyz';
             })
         };    
-        fetchDatas();    
+        fetchDatas();   
+        if(localStorage.getItem('discord_client_id') != null && localStorage.getItem('discord_client_name')){
+          setDiscord(true);
+          localStorage.removeItem('productId');
+        } 
     }, [id]);
 
     function connectDiscord(){
