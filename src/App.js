@@ -39,7 +39,7 @@ function App() {
   if(!isLogged && location.pathname !== '/auth/callback' && location.pathname.split('/')[1] === 'dashboard'){
     return <Logged />;
   }
-  else if(localStorage.getItem('guildId') == null && location.pathname !== '/auth/guilds' && isLogged && localStorage.getItem('productId') != null){
+  else if(localStorage.getItem('guildId') == null && location.pathname !== '/auth/guilds' && isLogged && localStorage.getItem('productId') == null){
     return(
       window.location.href="/auth/guilds"
     );
