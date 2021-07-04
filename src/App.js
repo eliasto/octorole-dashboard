@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   Switch,
   Route,
-  useLocation, Redirect
+  useLocation
 } from 'react-router-dom';
 
 import './css/style.scss';
@@ -20,8 +20,8 @@ const Home = React.lazy(() => import('./pages/Front'));
 const Logged = React.lazy(() => import('./pages/Logged'));
 const Guilds = React.lazy(() => import('./auth/guilds'));
 const Callback = React.lazy(() => import('./auth/callback'));
-
-
+const Server = React.lazy(() => import('./shop/server'));
+const Product = React.lazy(() => import('./shop/product'));
 
 function App() {
 
@@ -47,6 +47,12 @@ function App() {
 
   return (
       <Switch>
+        <Route path="/shop/:id">
+          <Server />
+        </Route>
+        <Route path="/product/:id">
+          <Product />
+        </Route>
         <Route exact path="/dashboard">
           <Dashboard />
         </Route>

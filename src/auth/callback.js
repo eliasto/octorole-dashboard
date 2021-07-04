@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from "react-router-dom";
-import logo from '../images/icon-with-text.png'
+import logo from '../images/logo-without-text.png'
 import {apipath, sitepath} from '../config.json'
 
 const Callback = (props) => {
@@ -47,17 +47,17 @@ const Callback = (props) => {
         // Now saving the jwt to use it for future authenticated requests to Strapi
           localStorage.setItem('discord_id', res.id);
           localStorage.setItem('discord_avatar', res.avatar);
-          setText('You have been successfully logged in. You will be redirected in a few seconds...');
+          setText('Vous êtes désormais connecté. Redirection dans quelques secondes...');
           setTimeout(() => window.location.href = sitepath+'/dashboard', 3000); // Redirect to homepage after 3 sec  
       })
       .catch(err => {
         console.log(err);
-        setText('An error occurred, please see the developer console.')
+        setText('Une erreur vient de se produire. Veuillez vérifier la console de développement.')
       })
       })
       .catch(err => {
         console.log(err);
-        setText('An error occurred, please see the developer console.')
+        setText('Une erreur vient de se produire. Veuillez vérifier la console de développement.')
       });
   }, [history, location.search, params.providerName]);
 
