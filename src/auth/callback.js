@@ -25,8 +25,10 @@ const Callback = (props) => {
       .then(res => {
         // Successfully logged with Strapi
         // Now saving the jwt to use it for future authenticated requests to Strapi
+        if(localStorage.getItem('productId') != null){
         localStorage.setItem('jwt', res.jwt);
         localStorage.setItem('username', res.user.username);
+        }
         localStorage.setItem('discord_token', parameters.get('access_token'))
         fetch(`https://discord.com/api/users/@me`,{
           method: 'get', 
