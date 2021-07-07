@@ -25,10 +25,8 @@ const Callback = (props) => {
       .then(res => {
         // Successfully logged with Strapi
         // Now saving the jwt to use it for future authenticated requests to Strapi
-        if(localStorage.getItem('productId') == null){
         localStorage.setItem('jwt', res.jwt);
         localStorage.setItem('username', res.user.username);
-        }
         localStorage.setItem('discord_token', parameters.get('access_token'))
         fetch(`https://discord.com/api/users/@me`,{
           method: 'get', 
@@ -54,6 +52,7 @@ const Callback = (props) => {
             setText('Vous êtes désormais connecté. Redirection dans quelques secondes...');  
             setTimeout(() => window.location.href = sitepath+'/product/'+localStorage.getItem('productId'), 3000); // Redirect to homepage after 3 sec   
           }else{
+            localStorage.removeItem('buyingProcess');
             localStorage.setItem('discord_id', res.id);
             localStorage.setItem('discord_avatar', res.avatar);
             setText('Vous êtes désormais connecté. Redirection dans quelques secondes...');  
@@ -73,7 +72,7 @@ const Callback = (props) => {
 
   return (
     <div>
-  <div className="flex h-screen justify-center items-center">
+  <div className="flex h-screen bg-gray-900 justify-center items-center">
     <p className="text-center bg-white p-5 rounded-lg shadow-lg">{text}</p>
     </div>
     <div className="absolute inset-x-0 bottom-0 h-40">

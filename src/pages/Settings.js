@@ -62,7 +62,7 @@ function Settings() {
         </div>
       </div>
     </div>
-    <span className="font-light text-xs">octorole - guildId: {localStorage.getItem('guildId')} - userId: {localStorage.getItem('discord_id')} - v.0.0.1b</span>
+    <span className="font-light text-xs">octorole - guildId: {localStorage.getItem('guildId')} - userId: {localStorage.getItem('discord_id')} - v.1.0.0</span>
           </div>
         </main>
       </div>
