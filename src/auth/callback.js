@@ -54,7 +54,6 @@ const Callback = (props) => {
             setText('Vous êtes désormais connecté. Redirection dans quelques secondes...');  
             setTimeout(() => window.location.href = sitepath+'/product/'+localStorage.getItem('productId'), 3000); // Redirect to homepage after 3 sec   
           }else{
-            localStorage.removeItem('buyingProcess');
             localStorage.setItem('discord_id', res.id);
             localStorage.setItem('discord_avatar', res.avatar);
             setText('Vous êtes désormais connecté. Redirection dans quelques secondes...');  

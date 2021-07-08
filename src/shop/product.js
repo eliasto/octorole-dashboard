@@ -38,14 +38,12 @@ function Product() {
 
     function connectDiscord(){
       localStorage.setItem('productId', id);
-      localStorage.setItem('buyingProcess', true);
       window.location.href = apipath+'/connect/discord';
     }
 
     function disconnect(){
       localStorage.removeItem('discord_client_id');
       localStorage.removeItem('discord_client_name');
-      localStorage.removeItem('buyingProcess');
       setDiscord(false);
     }
 
@@ -89,6 +87,9 @@ function Product() {
       {discord?<PayPalButton
         amount={data.price}
         shippingPreference="NO_SHIPPING" 
+        options={{
+          clientId: "AUVOEibtOwN16L0UBeS--KGFNXuYi1gEKHa6zO3fSO-sjd8e9i5vbxSZJ_wfcbTJkLaz6o9buyvDrrC3"
+        }}
         onSuccess={(details, data) => {
           console.log(details, data);
           setOrderId(data.orderID);
