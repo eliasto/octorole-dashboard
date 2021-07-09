@@ -194,16 +194,27 @@ function Settings() {
   }
   
   async function ChangePaypal(){
-    await axios.put(`${apipath}/servers/${localStorage.getItem('server_id')}`,{
-      paypal,
-    } ,{
+    await axios.get(`${apipath}/servers?guildId=${localStorage.getItem('guildId')}` ,{
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+          'Content-Type': 'application/x-www-form-urlencoded'
         }})
-        .then(res => {
-          if(res.status === 200){
-            toast().success('Changement appliqué', `Votre adresse paypal a bien été modifié !`).for(3000).show() //display for 3000ms
-          }
+        .then(async (response) => {
+          await axios.put(`${apipath}/servers/${response.id}`,{
+            paypal,
+          } ,{
+              headers: {
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+              }})
+              .then(res => {
+                if(res.status === 200){
+                  toast().success('Changement appliqué', `Votre adresse paypal a bien été modifié !`).for(3000).show() //display for 3000ms
+                }
+              }).catch(e =>{
+                toast().danger('Une erreur est survenue', `Merci de réessayer dans quelques instants. Si le problème persiste, merci de contacter le support.`).for(6000).show() //display for 3000ms
+                console.log(e);
+              })
+          
         }).catch(e =>{
           toast().danger('Une erreur est survenue', `Merci de réessayer dans quelques instants. Si le problème persiste, merci de contacter le support.`).for(6000).show() //display for 3000ms
           console.log(e);

@@ -14,7 +14,6 @@ class Guilds extends React.Component {
 
 
 async checkServer(id, name){
-  const server_id = id;
   if(this.state.blocked === false){
     this.setState(() =>{
       return{
@@ -70,7 +69,6 @@ headers: new Headers({
 
   localStorage.setItem('guildId', id);
   localStorage.setItem('guildName', name);
-  localStorage.setItem('server_id', server_id)
   window.location.href = '/dashboard';
   }
 }
