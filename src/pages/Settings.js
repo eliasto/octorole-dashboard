@@ -219,6 +219,7 @@ function Settings() {
   
   async function ChangePaypal(){
     setIsPaypalLoading(true);
+    console.log(paypalData);
           await axios.put(`${apipath}/servers/${id}`,{
             paypal: paypalData
           } ,{
@@ -229,6 +230,7 @@ function Settings() {
                 console.log(res);
                 if(res.status === 200){
                   setIsPaypalLoading(false);
+                  setPaypalPlaceholder(paypalData);
                   toast().success('Changement appliqué', `Votre adresse paypal a bien été modifié !`).for(3000).show() //display for 3000ms
                 }
               }).catch(e =>{
