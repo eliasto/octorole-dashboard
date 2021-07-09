@@ -15,7 +15,7 @@ function Settings() {
 
   const cancelButtonRef = useRef(null)
   const [isLoading, setIsLoading] = useState(false);
-  const [paypal, setPaypal] = useState(null);
+  const [paypalData, setPaypal] = useState(null);
   const [isPaypalLoading, setIsPaypalLoading] = useState(false);
   const [paypalPlaceholder, setPaypalPlaceholder] = useState('paypal@octorole.xyz');
 
@@ -89,7 +89,7 @@ function Settings() {
       />
     </div>
           <button
-            onClick={()=>ChangePaypal(paypal)}
+            onClick={()=>ChangePaypal(paypalData)}
             type="button"
             className="inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:text-sm"
           >
@@ -224,7 +224,7 @@ function Settings() {
         }})
         .then(async (response) => {
           await axios.put(`${apipath}/servers/${response.data[0].id}`,{
-            paypal: paypal,
+            paypal: paypalData,
           } ,{
               headers: {
                 'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
