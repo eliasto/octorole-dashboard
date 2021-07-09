@@ -223,7 +223,6 @@ function Settings() {
           'Content-Type': 'application/x-www-form-urlencoded'
         }})
         .then(async (response) => {
-          console.log('là', response.data[0].id)
           await axios.put(`${apipath}/servers/${response.data[0].id}`,{
             paypal: paypal,
           } ,{
@@ -231,6 +230,7 @@ function Settings() {
                 'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
               }})
               .then(res => {
+                console.log(res);
                 if(res.status === 200){
                   setIsPaypalLoading(false);
                   toast().success('Changement appliqué', `Votre adresse paypal a bien été modifié !`).for(3000).show() //display for 3000ms
