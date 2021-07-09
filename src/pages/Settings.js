@@ -220,7 +220,7 @@ function Settings() {
   async function ChangePaypal(){
     setIsPaypalLoading(true);
           await axios.put(`${apipath}/servers/${id}`,{
-            paypal: paypalData,
+            paypal: paypalData
           } ,{
               headers: {
                 'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
