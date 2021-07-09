@@ -6,6 +6,7 @@ import {apipath} from '../config.json'
 
 import Sidebar from '../partials/Sidebar';
 import Header from '../partials/Header';
+import { getAllByDisplayValue } from '@testing-library/react';
 
 const { toast } = require('tailwind-toast')
 
@@ -79,7 +80,7 @@ function Settings() {
         Paypal
       </label>
       <input
-        onChange={(e) => {setIsPaypalLoading(true); setPaypal(e.value);}}
+        onChange={(e) => setPaypal(e.value)}
         type="text"
         name="paypal"
         id="paypal"
@@ -90,7 +91,7 @@ function Settings() {
           <button
             onClick={()=>ChangePaypal(paypal)}
             type="button"
-            className="inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md text-purple-700 bg-purple-100 hover:bg-purple-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:text-sm"
+            className="inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:text-sm"
           >
             {isPaypalLoading?<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -215,14 +216,14 @@ function Settings() {
   }
   
   async function ChangePaypal(){
+    setIsPaypalLoading(true);
     await axios.get(`${apipath}/servers?guildId=${localStorage.getItem('guildId')}` ,{
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
           'Content-Type': 'application/x-www-form-urlencoded'
         }})
         .then(async (response) => {
-          console.log(response, response.data, response.data.id);
-          await axios.put(`${apipath}/servers/${response.data.id}`,{
+          await axios.put(`${apipath}/servers/${response.data[0].id}`,{
             paypal,
           } ,{
               headers: {
@@ -241,6 +242,7 @@ function Settings() {
           toast().danger('Une erreur est survenue', `Merci de réessayer dans quelques instants. Si le problème persiste, merci de contacter le support.`).for(6000).show() //display for 3000ms
           console.log(e);
         })
+        setIsPaypalLoading(false);
   }
 
 
