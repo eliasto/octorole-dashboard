@@ -6,7 +6,6 @@ import {apipath} from '../config.json'
 
 import Sidebar from '../partials/Sidebar';
 import Header from '../partials/Header';
-import { getAllByDisplayValue } from '@testing-library/react';
 
 const { toast } = require('tailwind-toast')
 
@@ -32,7 +31,7 @@ function Settings() {
         }})
         .then((response) => {
           console.log(response)
-          setPaypal(response.data[0].paypal);
+          setPaypalPlaceholder(response.data[0].paypal);
           setId(response.data[0].id)
         }).catch(e =>{
           console.log(e);
@@ -225,6 +224,7 @@ function Settings() {
           } ,{
               headers: {
                 'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+                'Content-Type': 'multipart/form-data',
               }})
               .then(res => {
                 console.log(res);
