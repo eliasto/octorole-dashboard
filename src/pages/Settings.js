@@ -1,9 +1,13 @@
 import React, { useState, Fragment,useRef } from 'react';
 import { Transition, Dialog } from '@headlessui/react'
 import { ExclamationIcon } from '@heroicons/react/outline'
+import axios from 'axios';
+import {apipath} from '../config.json'
 
 import Sidebar from '../partials/Sidebar';
 import Header from '../partials/Header';
+
+const { toast } = require('tailwind-toast')
 
 function Settings() {
   const [open, setOpen] = useState(false)
@@ -62,11 +66,11 @@ function Settings() {
         name="paypal"
         id="paypal"
         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-        placeholder="you@example.com"
+        placeholder="paypal@octorole.xyz"
       />
     </div>
           <button
-            onClick={()=>setOpen(!open)}
+            onClick={()=>ChangePaypal(paypal)}
             type="button"
             className="inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md text-purple-700 bg-purple-100 hover:bg-purple-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:text-sm"
           >
@@ -81,7 +85,7 @@ function Settings() {
       <div className="px-4 py-5 sm:p-6">
         <h3 className="text-lg leading-6 font-medium text-gray-900">Supprimer le serveur d'octorole</h3>
         <div className="mt-2 text-sm text-gray-500">
-          <p>Une fois le serveur supprimé, il ne sera impossible de récupérer les transactions, produits et autres informations. {/*Si besoin, veillez à exporter toutes les transactions depuis l'onglet "Transaction" puis "Exporter".*/}</p>
+          <p>Une fois le serveur supprimé, il sera impossible de récupérer les transactions, produits et autres informations. {/*Si besoin, veillez à exporter toutes les transactions depuis l'onglet "Transaction" puis "Exporter".*/}</p>
         </div>
         <div className="mt-5">
           <button
@@ -188,6 +192,24 @@ function Settings() {
     setIsLoading(false);
     window.location.reload();
   }
+  
+  async function ChangePaypal(){
+    await axios.put(`${apipath}/servers/${localStorage.getItem('server_id')}`,{
+      paypal,
+    } ,{
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+        }})
+        .then(res => {
+          if(res.status === 200){
+            toast().success('Changement appliqué', `Votre adresse paypal a bien été modifié !`).for(3000).show() //display for 3000ms
+          }
+        }).catch(e =>{
+          toast().danger('Une erreur est survenue', `Merci de réessayer dans quelques instants. Si le problème persiste, merci de contacter le support.`).for(6000).show() //display for 3000ms
+          console.log(e);
+        })
+  }
+
 
 }
 
