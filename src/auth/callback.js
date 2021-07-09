@@ -5,7 +5,7 @@ import logo from '../images/logo-without-text.png'
 import {apipath, sitepath} from '../config.json'
 
 const Callback = (props) => {
-  const [text, setText] = useState('Loading...');
+  const [text, setText] = useState('Chargement...');
   const location = useLocation();
   const params = useParams();
   const history = useHistory();

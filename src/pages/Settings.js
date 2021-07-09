@@ -10,6 +10,7 @@ function Settings() {
 
   const cancelButtonRef = useRef(null)
   const [isLoading, setIsLoading] = useState(false);
+  const [paypal, setPaypal] = useState(null);
 
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -43,6 +44,37 @@ function Settings() {
           </div>
         </div>
             </div>*/}
+            {/*Ajouter paypla */}
+            <div className="bg-white shadow sm:rounded-lg mb-5">
+      <div className="px-4 py-5 sm:p-6">
+        <h3 className="text-lg leading-6 font-medium text-gray-900">Ajouter mon adresse Paypal</h3>
+        <div className="mt-2 text-sm text-gray-500">
+          <p>Rentrez ci-dessous votre adresse Paypal Business pour recevoir vos paiement effectués sur octorole !</p>
+        </div>
+        <div className="mt-5">
+        <div className="mb-3">
+      <label htmlFor="paypal" className="sr-only">
+        Paypal
+      </label>
+      <input
+        onChange={(e) => setPaypal(e.value)}
+        type="text"
+        name="paypal"
+        id="paypal"
+        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+        placeholder="you@example.com"
+      />
+    </div>
+          <button
+            onClick={()=>setOpen(!open)}
+            type="button"
+            className="inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md text-purple-700 bg-purple-100 hover:bg-purple-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:text-sm"
+          >
+            Confirmer
+          </button>
+        </div>
+      </div>
+    </div>
 
 {/* Alerte suppression */}
           <div className="bg-white shadow sm:rounded-lg">
