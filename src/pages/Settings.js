@@ -1,4 +1,4 @@
-import React, { useState, Fragment,useRef } from 'react';
+import React, { useState, Fragment,useRef, useEffect } from 'react';
 import { Transition, Dialog } from '@headlessui/react'
 import { ExclamationIcon } from '@heroicons/react/outline'
 import axios from 'axios';
@@ -15,9 +15,27 @@ function Settings() {
   const cancelButtonRef = useRef(null)
   const [isLoading, setIsLoading] = useState(false);
   const [paypal, setPaypal] = useState(null);
+  const [isPaypalLoading, setIsPaypalLoading] = useState(false);
+  const [paypalPlaceholder, setPaypalPlaceholder] = useState('paypal@octorole.xyz');
 
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  useEffect(() =>{
+    const getPaypal = async () => {
+      await axios.get(`${apipath}/servers?guildId=${localStorage.getItem('guildId')}` ,{
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }})
+        .then(async (response) => {
+          setPaypal(response.data.paypal);
+        }).catch(e =>{
+          console.log(e);
+        })
+    }
+    getPaypal();
+}, []);
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -61,12 +79,12 @@ function Settings() {
         Paypal
       </label>
       <input
-        onChange={(e) => setPaypal(e.value)}
+        onChange={(e) => {setIsPaypalLoading(true); setPaypal(e.value);}}
         type="text"
         name="paypal"
         id="paypal"
         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-        placeholder="paypal@octorole.xyz"
+        placeholder={paypalPlaceholder}
       />
     </div>
           <button
@@ -74,7 +92,10 @@ function Settings() {
             type="button"
             className="inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md text-purple-700 bg-purple-100 hover:bg-purple-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 sm:text-sm"
           >
-            Confirmer
+            {isPaypalLoading?<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>: "Confirmer"}
           </button>
         </div>
       </div>
@@ -200,6 +221,7 @@ function Settings() {
           'Content-Type': 'application/x-www-form-urlencoded'
         }})
         .then(async (response) => {
+          console.log(response, response.data, response.data.id);
           await axios.put(`${apipath}/servers/${response.data.id}`,{
             paypal,
           } ,{
