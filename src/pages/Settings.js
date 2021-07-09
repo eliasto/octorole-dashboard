@@ -82,7 +82,7 @@ function Settings() {
         Paypal
       </label>
       <input
-        onChange={(e) => setPaypal(e.value)}
+        onChange={(e) => setPaypal(e.target.value)}
         type="text"
         name="paypal"
         id="paypal"
