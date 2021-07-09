@@ -223,17 +223,20 @@ function Settings() {
           'Content-Type': 'application/x-www-form-urlencoded'
         }})
         .then(async (response) => {
+          console.log('là', response.data[0].id)
           await axios.put(`${apipath}/servers/${response.data[0].id}`,{
-            paypal,
+            paypal: paypal,
           } ,{
               headers: {
                 'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
               }})
               .then(res => {
                 if(res.status === 200){
+                  setIsPaypalLoading(false);
                   toast().success('Changement appliqué', `Votre adresse paypal a bien été modifié !`).for(3000).show() //display for 3000ms
                 }
               }).catch(e =>{
+                setIsPaypalLoading(false);
                 toast().danger('Une erreur est survenue', `Merci de réessayer dans quelques instants. Si le problème persiste, merci de contacter le support.`).for(6000).show() //display for 3000ms
                 console.log(e);
               })
@@ -241,9 +244,7 @@ function Settings() {
         }).catch(e =>{
           toast().danger('Une erreur est survenue', `Merci de réessayer dans quelques instants. Si le problème persiste, merci de contacter le support.`).for(6000).show() //display for 3000ms
           console.log(e);
-        })
-        setIsPaypalLoading(false);
-  }
+        })  }
 
 
 }
