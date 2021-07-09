@@ -18,6 +18,7 @@ function Settings() {
   const [paypalData, setPaypal] = useState(null);
   const [isPaypalLoading, setIsPaypalLoading] = useState(false);
   const [paypalPlaceholder, setPaypalPlaceholder] = useState('paypal@octorole.xyz');
+  const [id, setId] = useState(null);
 
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -29,8 +30,10 @@ function Settings() {
           'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
           'Content-Type': 'application/x-www-form-urlencoded'
         }})
-        .then(async (response) => {
-          setPaypal(response.data.paypal);
+        .then((response) => {
+          console.log(response)
+          setPaypal(response.data[0].paypal);
+          setId(response.data[0].id)
         }).catch(e =>{
           console.log(e);
         })
@@ -217,13 +220,7 @@ function Settings() {
   
   async function ChangePaypal(){
     setIsPaypalLoading(true);
-    await axios.get(`${apipath}/servers?guildId=${localStorage.getItem('guildId')}` ,{
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }})
-        .then(async (response) => {
-          await axios.put(`${apipath}/servers/${response.data[0].id}`,{
+          await axios.put(`${apipath}/servers/${id}`,{
             paypal: paypalData,
           } ,{
               headers: {
@@ -240,11 +237,7 @@ function Settings() {
                 toast().danger('Une erreur est survenue', `Merci de réessayer dans quelques instants. Si le problème persiste, merci de contacter le support.`).for(6000).show() //display for 3000ms
                 console.log(e);
               })
-          
-        }).catch(e =>{
-          toast().danger('Une erreur est survenue', `Merci de réessayer dans quelques instants. Si le problème persiste, merci de contacter le support.`).for(6000).show() //display for 3000ms
-          console.log(e);
-        })  }
+        }
 
 
 }
