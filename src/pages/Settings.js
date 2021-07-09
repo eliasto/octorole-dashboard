@@ -200,6 +200,7 @@ function Settings() {
           'Content-Type': 'application/x-www-form-urlencoded'
         }})
         .then(async (response) => {
+          console.log(response);
           await axios.put(`${apipath}/servers/${response.id}`,{
             paypal,
           } ,{
