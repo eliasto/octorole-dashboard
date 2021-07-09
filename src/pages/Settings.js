@@ -30,7 +30,6 @@ function Settings() {
           'Content-Type': 'application/x-www-form-urlencoded'
         }})
         .then((response) => {
-          console.log(response)
           setPaypalPlaceholder(response.data[0].paypal);
           setId(response.data[0].id)
         }).catch(e =>{
@@ -219,7 +218,6 @@ function Settings() {
   
   async function ChangePaypal(){
     setIsPaypalLoading(true);
-    console.log(paypalData);
           await axios.put(`${apipath}/servers/${id}`,{
             paypal: paypalData
           } ,{
@@ -227,7 +225,6 @@ function Settings() {
                 'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
               }})
               .then(res => {
-                console.log(res);
                 if(res.status === 200){
                   setIsPaypalLoading(false);
                   setPaypalPlaceholder(paypalData);
