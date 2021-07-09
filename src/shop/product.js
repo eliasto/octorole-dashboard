@@ -85,16 +85,36 @@ function Product() {
     </div>
     <div className="mt-5 text-center text-xs">
       {discord?<PayPalButton
-        amount={data.price}
-        shippingPreference="NO_SHIPPING" 
-        options={{
-          clientId: "AUVOEibtOwN16L0UBeS--KGFNXuYi1gEKHa6zO3fSO-sjd8e9i5vbxSZJ_wfcbTJkLaz6o9buyvDrrC3"
-        }}
-        onSuccess={(details, data) => {
-          console.log(details, data);
-          setOrderId(data.orderID);
-
-        }}
+        createOrder={(datas, actions) => {
+          return actions.order.create({
+              purchase_units: [{
+                description: `OCTOROLE - PAYMENT TO ${data.server.name} FOR ${data.name} TO DISCORD CLIENT ID ${localStorage.getItem('discord_client_id')}`,
+                reference_id: `${data.server.guildId}_${localStorage.getItem('discord_client_id')}_${new Date().getTime()}_${data.id}`,
+                  amount: {
+                    currency_code: "EUR",
+                    value: data.price
+                  },
+                  payee: {
+                    email_address: data.server.paypal
+                  }
+              }],
+              application_context: {
+                 shipping_preference: "NO_SHIPPING" // default is "GET_FROM_FILE"
+               }
+          });
+      }}
+      onApprove={(data, actions) => {
+          // Capture the funds from the transaction
+          return actions.order.capture().then(function(details) {
+              // Show a success message to your buyer
+              setOrderId(details.id)
+          });
+      }}
+      options={{
+        currency: "EUR",
+        clientId: "AUVOEibtOwN16L0UBeS--KGFNXuYi1gEKHa6zO3fSO-sjd8e9i5vbxSZJ_wfcbTJkLaz6o9buyvDrrC3"
+      }}
+      onButtonReady={() => console.log('a modifier')}
       />:<button
         onClick={() => connectDiscord()}
         type="button"
