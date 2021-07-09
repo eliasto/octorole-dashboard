@@ -224,7 +224,6 @@ function Settings() {
           } ,{
               headers: {
                 'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
-                'Content-Type': 'multipart/form-data',
               }})
               .then(res => {
                 console.log(res);
