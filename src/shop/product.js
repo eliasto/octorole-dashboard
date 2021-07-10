@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import axios from "axios";
-import {apipath} from '../config.json';
+import {apipath, sitepath} from '../config.json';
 import { InformationCircleIcon, CalendarIcon, CurrencyEuroIcon, CheckCircleIcon  } from '@heroicons/react/solid'
 import {PayPalButton} from 'react-paypal-button-v2'
 
@@ -25,8 +25,11 @@ function Product() {
               const datas = res.data;
               setData(datas);     
               setLoading(false);
+              if(res.data.server.paypal == null){
+                window.location.href = sitepath;
+              }
             }).catch(e =>{
-              window.location.href = 'https://octorole.xyz';
+              window.location.href = sitepath;
             })
         };    
         fetchDatas();   
@@ -89,7 +92,7 @@ function Product() {
           return actions.order.create({
               purchase_units: [{
                 description: `OCTOROLE - PAYMENT TO ${data.server.name} FOR ${data.name} TO DISCORD CLIENT ID ${localStorage.getItem('discord_client_id')}`,
-                reference_id: `${data.server.guildId}_${localStorage.getItem('discord_client_id')}_${new Date().getTime()}_${data.id}`,
+                reference_id: `${data.server.guildId}_${localStorage.getItem('discord_client_id')}_${new Date().getTime()}_${data.id}_${localStorage.getItem('discord_client_name')}`,
                   amount: {
                     currency_code: "EUR",
                     value: data.price
@@ -104,10 +107,9 @@ function Product() {
           });
       }}
       onApprove={(data, actions) => {
-          // Capture the funds from the transaction
           return actions.order.capture().then(function(details) {
-              // Show a success message to your buyer
-              setOrderId(details.id)
+            console.log(details)
+              setOrderId(details.id);
           });
       }}
       options={{
