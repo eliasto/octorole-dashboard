@@ -114,9 +114,9 @@ function Product() {
       }}
       options={{
         currency: "EUR",
-        clientId: "AUVOEibtOwN16L0UBeS--KGFNXuYi1gEKHa6zO3fSO-sjd8e9i5vbxSZJ_wfcbTJkLaz6o9buyvDrrC3"
+        clientId: "AV_swQF7yf2snHzz4UCpp1HT2GlJd6HfRKJe4oGEucq5ve3towhmNeTXyL17jCvy6XvdIat77QZBOYJ2"
       }}
-      onButtonReady={() => console.log('a modifier')}
+      onButtonReady={() => {}}
       />:<button
         onClick={() => connectDiscord()}
         type="button"

@@ -30,7 +30,9 @@ function Settings() {
           'Content-Type': 'application/x-www-form-urlencoded'
         }})
         .then((response) => {
-          setPaypalPlaceholder(response.data[0].paypal);
+          if(response.data[0].paypal != null){
+            setPaypalPlaceholder(response.data[0].paypal);
+          }
           setId(response.data[0].id)
         }).catch(e =>{
           console.log(e);
