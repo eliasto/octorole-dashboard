@@ -1,7 +1,7 @@
 import { Fragment, useState, useRef, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { EmojiHappyIcon, XIcon, LightBulbIcon } from '@heroicons/react/solid'
-import { ExclamationIcon } from '@heroicons/react/outline'
+import { ExclamationIcon, CheckCircleIcon, ExclamationCircleIcon } from '@heroicons/react/outline'
 import Pagination from '../pagination';
 
 import Picker from 'emoji-picker-react';
@@ -26,7 +26,7 @@ export default function List(props){
   const [highlightName, setHighlightName] = useState(null);
   const [highlightIndex, setHighlightIndex] = useState(null);
   const [openModalHighlight, setOpenModaleHighlight] = useState(false);
-
+  const [notification, setNotification] = useState([])
 
   /* Partie update */
   const [chosenEmoji, setChosenEmoji] = useState(null);
@@ -83,7 +83,7 @@ if(data.length !== 0){
           <div className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-700 rounded">Désactivé</div>
         </td>)}
         <td className="p-2 whitespace-nowrap">
-        <button className="ml-2" onClick={() => {setHighlightName(data[data.length-i-1].name); setHighlightIndex(data.length-i-1); setOpenModaleHighlight(!openModalHighlight)}}><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <button className="ml-2" onClick={() => {setHighlightName(data[data.length-i-1].name); setHighlightIndex(data.length-i-1); setOpenModaleHighlight(!openModalHighlight);}}><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
 </svg></button>
           <button className="ml-2" onClick={() => {setOpen(!open); setValue(data[data.length-i-1]); setValueIndex(data.length-i-1); updateValues(data[data.length-i-1])}}><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg></button>
@@ -94,6 +94,56 @@ if(data.length !== 0){
         </td>
       </tr>)
   } }
+
+  function showNotification(type, name, description){
+    setNotification(<>
+      {/* Global notification live region, render this permanently at the end of the document */}
+      <div
+        aria-live="assertive"
+        className="fixed inset-0 flex items-end px-4 py-6 pointer-events-none p-6 items-start"
+      >
+        <div className="w-full flex flex-col items-center space-y-4 sm:items-end">
+          {/* Notification panel, dynamically insert this into the live region when it needs to be displayed */}
+          <Transition
+            show={true}
+            as={Fragment}
+            enter="transform ease-out duration-300 transition"
+            enterFrom="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+            enterTo="translate-y-0 opacity-100 sm:translate-x-0"
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+              <div className="p-4">
+                <div className="flex items-start">
+                  <div className="flex-shrink-0">
+                    {type === 'success'?<CheckCircleIcon className="h-6 w-6 text-green-400" aria-hidden="true" />:<ExclamationCircleIcon className="h-6 w-6 text-red-400" aria-hidden="true" />}
+                  </div>
+                  <div className="ml-3 w-0 flex-1 pt-0.5">
+                    <p className="text-sm font-medium text-gray-900">{name}</p>
+                    <p className="mt-1 text-sm text-gray-500">{description}</p>
+                  </div>
+                  <div className="ml-4 flex-shrink-0 flex">
+                    <button
+                      className="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      onClick={() => {
+                        setNotification();
+                      }}
+                    >
+                      <span className="sr-only">Close</span>
+                      <XIcon className="h-5 w-5" aria-hidden="true" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Transition>
+        </div>
+      </div>
+    </>);
+    setTimeout(function(){ setNotification(); }, 3000);
+  }
 
   return (
     <div>
@@ -540,7 +590,6 @@ if(data.length !== 0){
         </div>
       </Dialog>
     </Transition.Root>
-
     {/* Edit highlight */}
     <Transition.Root show={openModalHighlight} as={Fragment}>
       <Dialog
@@ -615,9 +664,9 @@ if(data.length !== 0){
         </div>
       </Dialog>
     </Transition.Root>
-
     </div>
     <Pagination count={count} setCount={setCount} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} max={data.length}/>
+    {notification}
     </div>  
     
   );
@@ -629,10 +678,12 @@ if(data.length !== 0){
         }})
         .then(res => {
           if(res.status === 200){
+            showNotification("success", "Produit supprimé", `Le produit ${data[index].name} a bien été supprimé.`);
             toast().success('Produit supprimé', `Le produit ${data[index].name} a bien été supprimé.`).for(3000).show() //display for 3000ms
             window.location.reload();
           }
         }).catch(e =>{
+          showNotification("error", "Une erreur est survenue", `Merci de réessayer dans quelques instants. Si le problème persiste, merci de contacter le support.`);
           toast().danger('Une erreur est survenue', `Merci de réessayer dans quelques instants. Si le problème persiste, merci de contacter le support.`).for(6000).show() //display for 3000ms
           console.log(e);
         })
@@ -673,11 +724,13 @@ if(data.length !== 0){
           setUpdate(false);
           setOpen(false);
           if(res.status === 200){
+            showNotification("success", "Changement appliqué", `Le produit ${formName} a bien été modifié !`);
             toast().success('Changement appliqué', `Le produit ${formName} a bien été modifié !`).for(3000).show() //display for 3000ms
           }
         }).catch(e =>{
           setUpdate(false);
           setOpen(false);
+          showNotification("error", "Une erreur est survenue", `Merci de réessayer dans quelques instants. Si le problème persiste, merci de contacter le support.`);
           toast().danger('Une erreur est survenue', `Merci de réessayer dans quelques instants. Si le problème persiste, merci de contacter le support.`).for(6000).show() //display for 3000ms
           console.log(e);
         })
@@ -696,12 +749,14 @@ if(data.length !== 0){
           setUpdate(false);
           setOpen(false);
           if(res.status === 200){
+            showNotification("success", "Changement appliqué", `Le produit ${highlightName} a bien été modifié !`);
             toast().success('Changement appliqué', `Le produit ${highlightName} a bien été modifié !`).for(3000).show() //display for 3000ms
             window.location.reload();
           }
         }).catch(e =>{
           setUpdate(false);
           setOpen(false);
+          showNotification("error", "Une erreur est survenue", `Merci de réessayer dans quelques instants. Si le problème persiste, merci de contacter le support.`);
           toast().danger('Une erreur est survenue', `Merci de réessayer dans quelques instants. Si le problème persiste, merci de contacter le support.`).for(6000).show() //display for 3000ms
           console.log(e);
         })
@@ -741,6 +796,7 @@ if(data.length !== 0){
           setUpdate(false);
           setOpenCreate(false);
           if(res.status === 200){
+            showNotification("success", "Changement appliqué", `Le produit ${formName} a bien été ajouté !`);
             toast().success('Changement appliqué', `Le produit ${formName} a bien été ajouté !`).for(3000).show() //display for 3000ms
             window.location.reload();
           }
@@ -748,8 +804,10 @@ if(data.length !== 0){
           setUpdate(false);
           setOpenCreate(false);
           if(error.response.data.statusCode === 400){
+            showNotification("error", "Formulaire incomplet", `Un ou plusieurs champs sont incomplets.`);
             toast().danger('Formulaire incomplet', `Un ou plusieurs champs sont incomplets.`).for(6000).show() //display for 3000ms
           }else{
+            showNotification("error", "Une erreur est survenue", `Merci de réessayer dans quelques instants. Si le problème persiste, merci de contacter le support.`);
           toast().danger('Une erreur est survenue', `Merci de réessayer dans quelques instants. Si le problème persiste, merci de contacter le support.`).for(6000).show() //display for 3000ms
           }
         })

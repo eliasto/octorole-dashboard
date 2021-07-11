@@ -85,7 +85,6 @@ function Front() {
     { name: 'CGU', href: '/legals/cgu' },
     { name: 'Politique de confidentalités', href: '/legals/rgpd' },
     { name: 'Mentions légales', href: '/legals' },
-
   ]
 
   return (
@@ -297,6 +296,11 @@ function Front() {
               </Link>
             </div>
           ))}
+          <div key="gérer mes cookies" className="px-5 py-2">
+              <a href="javascript:window.Confirmic('ConsentManager:show')" className="text-base text-gray-500 hover:text-gray-300">
+                Gérer mes cookies
+              </a>
+            </div>
         </nav>
         <p className="mt-8 text-center text-base text-gray-400">&copy; {new Date().getFullYear()} octorole. Tous droits réservés.</p>
       </div>

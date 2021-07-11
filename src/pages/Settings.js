@@ -1,11 +1,17 @@
 import React, { useState, Fragment,useRef, useEffect } from 'react';
 import { Transition, Dialog } from '@headlessui/react'
-import { ExclamationIcon } from '@heroicons/react/outline'
+import {  XIcon } from '@heroicons/react/solid'
+import { ExclamationIcon,CheckCircleIcon, ExclamationCircleIcon } from '@heroicons/react/outline'
 import axios from 'axios';
 import {apipath} from '../config.json'
 
 import Sidebar from '../partials/Sidebar';
 import Header from '../partials/Header';
+import { Switch } from '@headlessui/react'
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
 
 const { toast } = require('tailwind-toast')
 
@@ -18,6 +24,14 @@ function Settings() {
   const [isPaypalLoading, setIsPaypalLoading] = useState(false);
   const [paypalPlaceholder, setPaypalPlaceholder] = useState('paypal@octorole.xyz');
   const [id, setId] = useState(null);
+  const [notification, setNotification] = useState([]);
+  const [enabled, setEnabled] = useState(false);
+  const [description, setDescription] = useState(null);
+  const [bannerLink, setBannerLink] = useState(null);
+  const [bannerMessage, setBannerMessage] = useState(null);
+  const [isShopDataLoading, setIsShopDataLoading] = useState(false);
+  const [bannerState, setBannerState] = useState(false);
+
 
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -33,6 +47,10 @@ function Settings() {
           if(response.data[0].paypal != null){
             setPaypalPlaceholder(response.data[0].paypal);
           }
+          setDescription(response.data[0].description);
+          setBannerMessage(response.data[0].bannerMessage);
+          setBannerLink(response.data[0].bannerLink);
+          setBannerState(response.data[0].bannerState);
           setId(response.data[0].id)
         }).catch(e =>{
           console.log(e);
@@ -40,6 +58,81 @@ function Settings() {
     }
     getPaypal();
 }, []);
+
+function showNotification(type, name, description){
+  setNotification(<>
+    {/* Global notification live region, render this permanently at the end of the document */}
+    <div
+      aria-live="assertive"
+      className="fixed inset-0 flex items-end px-4 py-6 pointer-events-none p-6 items-start"
+    >
+      <div className="w-full flex flex-col items-center space-y-4 sm:items-end">
+        {/* Notification panel, dynamically insert this into the live region when it needs to be displayed */}
+        <Transition
+          show={true}
+          as={Fragment}
+          enter="transform ease-out duration-300 transition"
+          enterFrom="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+          enterTo="translate-y-0 opacity-100 sm:translate-x-0"
+          leave="transition ease-in duration-100"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <div className="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+            <div className="p-4">
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  {type === 'success'?<CheckCircleIcon className="h-6 w-6 text-green-400" aria-hidden="true" />:<ExclamationCircleIcon className="h-6 w-6 text-red-400" aria-hidden="true" />}
+                </div>
+                <div className="ml-3 w-0 flex-1 pt-0.5">
+                  <p className="text-sm font-medium text-gray-900">{name}</p>
+                  <p className="mt-1 text-sm text-gray-500">{description}</p>
+                </div>
+                <div className="ml-4 flex-shrink-0 flex">
+                  <button
+                    className="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    onClick={() => {
+                      setNotification();
+                    }}
+                  >
+                    <span className="sr-only">Close</span>
+                    <XIcon className="h-5 w-5" aria-hidden="true" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Transition>
+      </div>
+    </div>
+  </>);
+  setTimeout(function(){ setNotification(); }, 3000);
+}
+
+async function ChangeShopData(){
+  setIsShopDataLoading(true);
+        await axios.put(`${apipath}/servers/${id}`,{
+          bannerState: bannerState,
+          bannerMessage: bannerMessage,
+          bannerLink: bannerLink,
+          description: description
+        } ,{
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+            }})
+            .then(res => {
+              if(res.status === 200){
+                setIsShopDataLoading(false);
+                showNotification("success", "Changement appliqué", `Votre page a bien été modifié !`);
+                toast().success('Changement appliqué', `Votre page a bien été modifié !`).for(3000).show() //display for 3000ms
+              }
+            }).catch(e =>{
+              setIsShopDataLoading(false);
+              showNotification("error", "Une erreur est survenue", `Merci de réessayer dans quelques instants. Si le problème persiste, merci de contacter le support.`);
+              toast().danger('Une erreur est survenue', `Merci de réessayer dans quelques instants. Si le problème persiste, merci de contacter le support.`).for(6000).show() //display for 3000ms
+              console.log(e);
+            })
+      }
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -70,6 +163,96 @@ function Settings() {
           </div>
         </div>
             </div>*/}
+        {/* Modifier le shop */}
+        <div className="bg-white shadow sm:rounded-lg mb-5">
+      <div className="px-4 py-5 sm:p-6">
+        <h3 className="text-lg leading-6 font-medium text-gray-900">Modifier la page de ma boutique</h3>
+        <div className="mt-2 text-sm text-gray-500">
+          <p>Modifier ici la page de votre boutique pour la rendre unique comme votre serveur !</p>
+        </div>
+        <div className="mt-5">
+        <div className="mb-3">
+      <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+        Description
+      </label>
+      <div className="mt-1">
+        <input
+          onChange={e =>{setDescription(e.target.value)}}
+          type="text"
+          name="description"
+          id="description"
+          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+          placeholder={description}
+        />
+      </div>
+    </div>
+    <div className="mb-3">
+      <label htmlFor="bannerMessage" className="block text-sm font-medium text-gray-700">
+        Message de la bannière
+      </label>
+      <div className="mt-1">
+        <input
+                onChange={e =>{setBannerMessage(e.target.value)}}
+          type="text"
+          name="bannerMessage"
+          id="bannerMessage"
+          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+          placeholder={bannerMessage}
+        />
+      </div>
+    </div>
+    <div className="mb-3">
+      <label htmlFor="bannerLink" className="block text-sm font-medium text-gray-700">
+        Lien de la bannière
+      </label>
+      <div className="mt-1">
+        <input
+        onChange={e =>{setBannerLink(e.target.value)}}
+          type="text"
+          name="bannerLink"
+          id="bannerLink"
+          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+          placeholder={bannerLink}
+        />
+      </div>
+    </div>
+    <Switch.Group as="div" className="flex items-center justify-between mb-3">
+      <Switch.Label as="span" className="flex-grow flex flex-col" passive>
+        <span className="text-sm font-medium text-gray-900">Activer la bannière</span>
+        <span className="text-sm text-gray-500">Permet d'afficher une bannière personnalisé sur la page de votre boutique.</span>
+      </Switch.Label>
+      <Switch
+        checked={bannerState}
+        onChange={setBannerState}
+        className={classNames(
+          bannerState ? 'bg-blue-600' : 'bg-gray-200',
+          'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
+        )}
+      >
+        <span className="sr-only">Activer la bannière</span>
+        <span
+          aria-hidden="true"
+          className={classNames(
+            bannerState ? 'translate-x-5' : 'translate-x-0',
+            'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200'
+          )}
+        />
+      </Switch>
+    </Switch.Group>
+          <button
+            onClick={()=>ChangeShopData()}
+            type="button"
+            className="inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:text-sm"
+          >
+            {isShopDataLoading?<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>: "Confirmer"}
+          </button>
+        </div>
+      </div>
+    </div>
+
             {/*Ajouter paypla */}
             <div className="bg-white shadow sm:rounded-lg mb-5">
       <div className="px-4 py-5 sm:p-6">
@@ -207,7 +390,7 @@ function Settings() {
         </div>
       </Dialog>
     </Transition.Root>
-
+            {notification}
     </div>
   );
 
@@ -230,10 +413,12 @@ function Settings() {
                 if(res.status === 200){
                   setIsPaypalLoading(false);
                   setPaypalPlaceholder(paypalData);
+                  showNotification("success", "Changement appliqué", `Votre adresse paypal a bien été modifié !`);
                   toast().success('Changement appliqué', `Votre adresse paypal a bien été modifié !`).for(3000).show() //display for 3000ms
                 }
               }).catch(e =>{
                 setIsPaypalLoading(false);
+                showNotification("error", "Une erreur est survenue", `Merci de réessayer dans quelques instants. Si le problème persiste, merci de contacter le support.`);
                 toast().danger('Une erreur est survenue', `Merci de réessayer dans quelques instants. Si le problème persiste, merci de contacter le support.`).for(6000).show() //display for 3000ms
                 console.log(e);
               })
