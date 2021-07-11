@@ -121,7 +121,9 @@ render(){
     <div className="text-center bg-white p-10 rounded-lg shadow-lg">
     <h1 className="font-bold mb-2 text-indigo-600 text-xl">Choisissez le serveur sur lequel vous souhaitez < br/>administrer votre boutique:</h1>
     {(this.state.loading? <p>Chargement de vos serveurs...</p>: null)}
-    { this.state.items.map((item) => {
+    { 
+    // eslint-disable-next-line array-callback-return
+    this.state.items.map((item) => {
         if(item.owner === true){
                 return (
                     <div className="flex justify-between p-3 items-center">

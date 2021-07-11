@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from "react-router-dom";
-import logo from '../images/logo-without-text.png'
 import {apipath, sitepath} from '../config.json'
 
 const Callback = (props) => {
@@ -9,9 +8,9 @@ const Callback = (props) => {
   const location = useLocation();
   const params = useParams();
   const history = useHistory();
-  const parameters = new URLSearchParams(location.search);
 
   useEffect(() => {
+    const parameters = new URLSearchParams(location.search);
     // Successfully logged with the provider
     // Now logging with strapi by using the access_token (given by the provider) in props.location.search
     fetch(`${apipath}/auth/discord/callback${location.search}`)

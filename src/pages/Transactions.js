@@ -3,16 +3,12 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from '../partials/Sidebar';
 import Header from '../partials/Header';
 import List from '../partials/transaction/list';
-import Pagination from '../partials/pagination';
-import Datepicker from '../partials/actions/Datepicker';
-import ExportButton from '../partials/actions/ExportButton';
 import axios from 'axios';
 import {apipath} from '../config.json';
 
 function Transactions() {
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [date, setDate] = useState([]);
   const [loading, setLoading] = useState(true);
   const[data, setData] = useState([]);
 

@@ -25,7 +25,7 @@ const Product = React.lazy(() => import('./shop/product'));
 
 function App() {
 
-  const [isLogged, setIsLogged] = useState(!!localStorage.getItem('jwt'));
+  const [isLogged] = useState(!!localStorage.getItem('jwt'));
 
   const location = useLocation();
 

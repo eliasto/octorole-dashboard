@@ -25,7 +25,6 @@ function Settings() {
   const [paypalPlaceholder, setPaypalPlaceholder] = useState('paypal@octorole.xyz');
   const [id, setId] = useState(null);
   const [notification, setNotification] = useState([]);
-  const [enabled, setEnabled] = useState(false);
   const [description, setDescription] = useState(null);
   const [bannerLink, setBannerLink] = useState(null);
   const [bannerMessage, setBannerMessage] = useState(null);

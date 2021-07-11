@@ -5,7 +5,7 @@ import {sitepath} from '../../config.json'
 
 function UserMenu() {
 
-  const [isLogged, setIsLogged] = useState(!!localStorage.getItem('jwt'));
+  const [setIsLogged] = useState(!!localStorage.getItem('jwt'));
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
 

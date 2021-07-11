@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {apipath} from '../config.json'
 function Logged() {
 
-    const [isLogged, setIsLogged] = useState(!!localStorage.getItem('jwt'));
+    const [isLogged] = useState(!!localStorage.getItem('jwt'));
     const redirectURI = apipath+'/connect/discord';
 
     if(!isLogged){
