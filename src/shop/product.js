@@ -52,11 +52,11 @@ function Product() {
 
     return (
       <div className="bg-gray-900 h-screen relative">
-              {(loading)?<div className="flex bg-gray-900 h-screen"><div className="m-auto"><svg class="animate-spin h-10 w-10 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg></div></div>:
+              {(loading)?<div className="flex bg-gray-900 h-screen"><div className="m-auto"><svg className="animate-spin h-10 w-10 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg></div></div>:
         <div className="bg-gray-900 absolute top-1/2 px-5 -translate-y-1/2 xs:top-1/2 xs:left-1/2 transform xs:-translate-x-1/2 xs:-translate-y-1/2">
-        <div class="max-w-md py-4 m-auto px-8 bg-white shadow-lg rounded-lg">
+        <div className="max-w-md py-4 m-auto px-8 bg-white shadow-lg rounded-lg">
 
-  <div class="flex justify-center -mt-16">
+  <div className="flex justify-center -mt-16">
     <span className="bg-purple-600 w-20 h-20 text-center rounded-full text-4xl border-4 border-white py-3 m-auto">{data.emoji}</span>
   </div>
   <div>
@@ -78,8 +78,8 @@ function Product() {
       </div>
     </div>
     </div>:null}
-    <h2 class="text-gray-800 text-3xl font-semibold text-center">{data.name}</h2>
-    <p class="mt-2 text-gray-600">{data.description}</p>
+    <h2 className="text-gray-800 text-3xl font-semibold text-center">{data.name}</h2>
+    <p className="mt-2 text-gray-600">{data.description}</p>
     <hr></hr>
     <div className="mt-3">
       <div><InformationCircleIcon className="w-5 h-5 inline-block mr-1"/> Ce produit est <span className="font-bold"> {data.type}</span>.</div>

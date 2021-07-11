@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../images/logo-transparent.png';
 import illustration from '../images/illustration.png';
-import { /*SpeakerphoneIcon,*/ XIcon } from '@heroicons/react/outline'
+import { SpeakerphoneIcon, XIcon } from '@heroicons/react/outline'
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon } from '@heroicons/react/outline'
@@ -97,31 +97,36 @@ function Front() {
     <div>
       {/* banner */}
       {(bannerOpen && isBanner)? 
-      <div className="relative bg-purple-600">
+      <div className="bg-purple-600">
       <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
-        <div className="pr-16 text-center sm:px-16">
-          <p className="font-medium text-white">
-            <span className="md:hidden">{bannerMessageShort}</span>
-            <span className="hidden md:inline">{bannerMessage}</span>
-            <span className="block sm:ml-2 sm:inline-block">
-              <a href={bannerLink} className="text-white font-bold underline">
-                {' '}
-                {buttonMessage} <span aria-hidden="true">&rarr;</span>
-              </a>
+        <div className="flex items-center justify-between flex-wrap">
+          <div className="w-0 flex-1 flex items-center">
+            <span className="flex p-2 rounded-lg bg-purple-800">
+              <SpeakerphoneIcon className="h-6 w-6 text-white" aria-hidden="true" />
             </span>
-          </p>
-        </div>
-        <div className="absolute inset-y-0 right-0 pt-1 pr-1 flex items-start sm:pt-1 sm:pr-2 sm:items-start">
-          <button
-            type="button"
-            onClick={()=>{
-              cookies.set('banner', false, { path: '/' });
-              setBannerOpen(false);}}
-            className="flex p-2 rounded-md hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-white"
-          >
-            <span className="sr-only">Dismiss</span>
-            <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
-          </button>
+            <p className="ml-3 font-medium text-white truncate">
+              <span className="md:hidden">{bannerMessageShort}</span>
+              <span className="hidden md:inline">{bannerMessage}</span>
+            </p>
+          </div>
+          <div className="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
+            <a
+              href={bannerLink}
+              className="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-purple-600 bg-white hover:bg-purple-50"
+            >
+              {buttonMessage}
+            </a>
+          </div>
+          <div className="order-2 flex-shrink-0 sm:order-3 sm:ml-3">
+            <button
+              onClick={()=>{setBannerOpen(false); cookies.set('banner', false, { path: '/', expires: new Date(new Date().getTime() + (24*60*60*1000))})}}
+              type="button"
+              className="-mr-1 flex p-2 rounded-md hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-white sm:-mr-2"
+            >
+              <span className="sr-only">Fermer</span>
+              <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
+            </button>
+          </div>
         </div>
       </div>
     </div>:null}
