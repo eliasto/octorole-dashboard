@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../images/logo-transparent.png';
 import illustration from '../images/illustration.png';
-import { SpeakerphoneIcon, XIcon } from '@heroicons/react/outline'
+import { /*SpeakerphoneIcon,*/ XIcon } from '@heroicons/react/outline'
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { MenuIcon } from '@heroicons/react/outline'
 import { LockClosedIcon, LightningBoltIcon, ChatAltIcon, ScaleIcon } from '@heroicons/react/outline'
 import axios from 'axios';
 import {apipath} from '../config.json';
+import Cookies from 'universal-cookie';
 
 function Front() {
 
@@ -19,8 +20,10 @@ function Front() {
   const [isBanner, setIsBanner] = useState(false);
   const [bannerLink, setBannerLink] = useState('');
   const [buttonMessage, setButtonMessage] = useState('');
+  const cookies = new Cookies();
 
   useEffect(() => {
+    const cookies = new Cookies();
     const fetchDatas = async () => {
       await axios.get(`${apipath}/data`, {
         headers: {
@@ -35,6 +38,10 @@ function Front() {
           setBannerMessageShort(datas.bannerMessageShort);
           setBannerLink(datas.bannerLink);
           setButtonMessage(datas.buttonMessage);
+          if(cookies.get('banner') == null || cookies.get('banner') === true){
+          } else {
+            setIsBanner(false);
+          }
         }).catch(e =>{
           console.log("Une erreur s'est produite lors de la requête: "+e);
         })
@@ -88,6 +95,37 @@ function Front() {
 
   return (
     <div>
+      {/* banner */}
+      {(bannerOpen && isBanner)? 
+      <div className="relative bg-purple-600">
+      <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
+        <div className="pr-16 text-center sm:px-16">
+          <p className="font-medium text-white">
+            <span className="md:hidden">{bannerMessageShort}</span>
+            <span className="hidden md:inline">{bannerMessage}</span>
+            <span className="block sm:ml-2 sm:inline-block">
+              <a href={bannerLink} className="text-white font-bold underline">
+                {' '}
+                {buttonMessage} <span aria-hidden="true">&rarr;</span>
+              </a>
+            </span>
+          </p>
+        </div>
+        <div className="absolute inset-y-0 right-0 pt-1 pr-1 flex items-start sm:pt-1 sm:pr-2 sm:items-start">
+          <button
+            type="button"
+            onClick={()=>{
+              cookies.set('banner', false, { path: '/' });
+              setBannerOpen(false);}}
+            className="flex p-2 rounded-md hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-white"
+          >
+            <span className="sr-only">Dismiss</span>
+            <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
+          </button>
+        </div>
+      </div>
+    </div>:null}
+
     <div className="min-h-screen">
       <div className="relative overflow-hidden">
         <Popover as="header" className="relative">
@@ -304,7 +342,7 @@ function Front() {
         <p className="mt-8 text-center text-base text-gray-400">&copy; {new Date().getFullYear()} octorole. Tous droits réservés.</p>
       </div>
     </footer>
-         {/* banner */}
+         {/* banner 
 
       {(bannerOpen && isBanner)? 
     <div className="fixed bottom-0 inset-x-0 pb-2 sm:pb-5">
@@ -341,7 +379,7 @@ function Front() {
           </div>
         </div>
       </div>
-    </div>:null}
+      </div>:null}*/}
       </div>        
     </div> 
     </div>

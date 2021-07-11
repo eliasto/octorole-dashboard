@@ -36,6 +36,7 @@
     "react-transition-group": "^4.4.1",
     "tailwind-toast": "^1.0.9",
     "tailwindcss": "^2.2.2",
+    "universal-cookie": "^4.0.4",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
