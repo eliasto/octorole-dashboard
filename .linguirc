@@ -1,0 +1,9 @@
+{
+   "catalogs": [{
+       "path": "src/translations/{locale}",
+       "include": "src"
+   }],
+   "sourceLocale": "en",
+   "locales": ["en", "fr"],
+   "format": "minimal"
+}

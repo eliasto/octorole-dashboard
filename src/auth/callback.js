@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from "react-router-dom";
-import {apipath, sitepath} from '../config.json'
+import {apipath, sitepath} from '../config.json';
+import {strings} from '../translations/lang';
 
 const Callback = (props) => {
-  const [text, setText] = useState('Chargement...');
+  const [text, setText] = useState(strings.auth.login.loading);
   const location = useLocation();
   const params = useParams();
   const history = useHistory();
@@ -50,23 +51,23 @@ const Callback = (props) => {
             localStorage.setItem('discord_client_name', res.username+'#'+res.discriminator);
             localStorage.setItem('discord_client_id', res.id);
             localStorage.removeItem('discord_token');
-            setText('Vous êtes désormais connecté. Redirection dans quelques secondes...');  
+            setText(strings.auth.login.success);  
             setTimeout(() => window.location.href = sitepath+'/product/'+localStorage.getItem('productId'), 3000); // Redirect to homepage after 3 sec   
           }else{
             localStorage.setItem('discord_id', res.id);
             localStorage.setItem('discord_avatar', res.avatar);
-            setText('Vous êtes désormais connecté. Redirection dans quelques secondes...');  
+            setText(strings.auth.login.success);  
           setTimeout(() => window.location.href = sitepath+'/dashboard', 3000); // Redirect to homepage after 3 sec 
           } 
       })
       .catch(err => {
         console.log(err);
-        setText('Une erreur vient de se produire. Veuillez vérifier la console de développement.')
+        setText(strings.auth.login.error);
       })
       })
       .catch(err => {
         console.log(err);
-        setText('Une erreur vient de se produire. Veuillez vérifier la console de développement.')
+        setText(strings.auth.login.error)
       });
   }, [history, location.search, params.providerName]);
 

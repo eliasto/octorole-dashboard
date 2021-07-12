@@ -9,6 +9,7 @@ import './css/style.scss';
 
 import { focusHandling } from 'cruip-js-toolkit';
 import './charts/ChartjsConfig';
+import {strings} from './translations/lang'
 
 // Import pages
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
@@ -28,6 +29,12 @@ function App() {
   const [isLogged] = useState(!!localStorage.getItem('jwt'));
 
   const location = useLocation();
+  
+  if(localStorage.getItem('lang') == null){
+    localStorage.setItem('lang', 'en');
+  }
+
+  strings.setLanguage(localStorage.getItem('lang'));
 
   useEffect(() => {
     document.querySelector('html').style.scrollBehavior = 'auto'
@@ -80,7 +87,6 @@ function App() {
         <Route exact path="/auth/guilds">
           <Guilds />
         </Route>
-
       </Switch>
   );
   }

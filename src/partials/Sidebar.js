@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import logo from  '../images/logo-without-text.png';
+import {strings} from '../translations/lang';
 
 function Sidebar({
   sidebarOpen,
@@ -8,6 +9,15 @@ function Sidebar({
   productCount,
   transactionCount
 }) {
+
+  var lang;
+
+  if(strings._language === 'fr'){
+    lang = 'en';
+  } else {
+    lang = 'fr';
+  }
+
   const location = useLocation();
   const { pathname } = location;
   var page = pathname.split('/')[2];
@@ -73,7 +83,7 @@ function Sidebar({
         </div>
         {/* Links */}
         <div>
-          <h3 className="text-xs uppercase text-gray-500 font-semibold pl-3">Navigation</h3>
+          <h3 className="text-xs uppercase text-gray-500 font-semibold pl-3">{strings.dashboard.sidebar.navigation}</h3>
           <ul className="mt-3">
             {/* Dashboard */}
             <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${page === '' && 'bg-gray-900'}`}>
@@ -84,7 +94,7 @@ function Sidebar({
                     <path className={`fill-current text-gray-600 ${page === '' && 'text-indigo-600'}`} d="M12 3c-4.963 0-9 4.037-9 9s4.037 9 9 9 9-4.037 9-9-4.037-9-9-9z" />
                     <path className={`fill-current text-gray-400 ${page === '' && 'text-indigo-200'}`} d="M12 15c-1.654 0-3-1.346-3-3 0-.462.113-.894.3-1.285L6 6l4.714 3.301A2.973 2.973 0 0112 9c1.654 0 3 1.346 3 3s-1.346 3-3 3z" />
                   </svg>
-                  <span className="text-sm font-medium">Administration</span>
+                  <span className="text-sm font-medium">{strings.dashboard.sidebar.administration}</span>
                 </div>
               </NavLink>
             </li>
@@ -97,7 +107,7 @@ function Sidebar({
                     <path className={`fill-current text-gray-400 ${page === 'products' && 'text-indigo-300'}`} d="M7 0l6 7H8v10H6V7H1z" />
                     <path className={`fill-current text-gray-600 ${page === 'products' && 'text-indigo-500'}`} d="M18 7v10h5l-6 7-6-7h5V7z" />
                   </svg>
-                    <span className="text-sm font-medium">Produits</span>
+                    <span className="text-sm font-medium">{strings.dashboard.sidebar.products}</span>
                   </div>
                   {/* Badge 
                   <div className="flex flex-shrink-0 ml-2">
@@ -116,7 +126,7 @@ function Sidebar({
                       <path className={`fill-current text-gray-700 ${page === 'transactions' && 'text-indigo-600'}`} d="M13 15L0 7v9c0 .355.189.685.496.864L13 24v-9z" />
                       <path className={`fill-current text-gray-600 ${page === 'transactions' && 'text-indigo-500'}`} d="M13 15.047V24l10.573-7.181A.999.999 0 0024 16V8l-11 7.047z" />
                     </svg>
-                    <span className="text-sm font-medium">Transactions</span>
+                    <span className="text-sm font-medium">{strings.dashboard.sidebar.transactions}</span>
                   </div>
                   {/* Badge 
                   <div className="flex flex-shrink-0 ml-2">
@@ -135,9 +145,21 @@ function Sidebar({
                     <path className={`fill-current text-gray-600 ${page === 'settings' && 'text-indigo-500'}`} d="M5.7 10.714c.195.4.298.84.3 1.286a3 3 0 11-3-3c.446.002.885.105 1.286.3l7.007-7.007 1.414 1.414L5.7 10.714z" />
                     <path className={`fill-current text-gray-400 ${page === 'settings' && 'text-indigo-300'}`} d="M19.707 9.292a3.012 3.012 0 00-1.415 1.415L13.286 5.7c-.4.195-.84.298-1.286.3a3 3 0 113-3 2.969 2.969 0 01-.3 1.286l5.007 5.006z" />
                   </svg>
-                  <span className="text-sm font-medium">Paramètres</span>
+                  <span className="text-sm font-medium">{strings.dashboard.sidebar.settings}</span>
                 </div>
               </NavLink>
+            </li>
+
+                  {/* Lang */}
+            <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0`}>
+              <button onClick={()=>{localStorage.setItem('lang', lang);window.location.reload()}} className={`block text-gray-200 hover:text-white transition duration-150`}>
+                <div className="flex flex-grow">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 h-6 w-6 mr-3 mt-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+                  </svg>
+                  <span className="text-sm font-medium text-left">{strings.miscellaneous.lang}</span>
+                </div>
+              </button>
             </li>
           </ul>
         </div>

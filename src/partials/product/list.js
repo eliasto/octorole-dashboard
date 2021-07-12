@@ -7,6 +7,7 @@ import Pagination from '../pagination';
 import Picker from 'emoji-picker-react';
 import axios from 'axios';
 import {apipath} from '../../config.json';
+import {strings} from '../../translations/lang';
 
 const { toast } = require('tailwind-toast')
 
@@ -156,12 +157,12 @@ if(data.length !== 0){
                     <svg className="w-4 h-4 fill-current opacity-50 flex-shrink-0" viewBox="0 0 16 16">
                         <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
                     </svg>
-                    <span className="hidden xs:block ml-2">Ajouter un produit</span>
+                    <span className="hidden xs:block ml-2">{strings.dashboard.products.add}</span>
                 </button>                
               </div>
     <div className="col-span-full xl:col-span-6 bg-white shadow-lg rounded-sm border border-gray-200">
       <header className="px-5 py-4 border-b border-gray-100">
-        <h2 className="font-semibold text-gray-800">Gérer vos produits</h2>
+        <h2 className="font-semibold text-gray-800">{strings.dashboard.products.title}</h2>
       </header>
       <div className="p-3">
 
@@ -172,22 +173,22 @@ if(data.length !== 0){
             <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
               <tr>
                 <th className="p-2 whitespace-nowrap">
-                  <div className="font-semibold text-left">Produit id</div>
+                  <div className="font-semibold text-left">{strings.dashboard.products.id}</div>
                 </th>
                 <th className="p-2 whitespace-nowrap">
-                  <div className="font-semibold text-left">Emoji</div>
+                  <div className="font-semibold text-left">{strings.dashboard.products.emoji}</div>
                 </th>
                 <th className="p-2 whitespace-nowrap">
-                  <div className="font-semibold text-left">Nom</div>
+                  <div className="font-semibold text-left">{strings.dashboard.products.name}</div>
                 </th>
                 <th className="p-2 whitespace-nowrap">
-                  <div className="font-semibold text-left">Prix</div>
+                  <div className="font-semibold text-left">{strings.dashboard.products.price}</div>
                 </th>
                 <th className="p-2 whitespace-nowrap">
-                  <div className="font-semibold text-left">Type</div>
+                  <div className="font-semibold text-left">{strings.dashboard.products.type}</div>
                 </th>
                 <th className="p-2 whitespace-nowrap">
-                  <div className="font-semibold text-left">Mise en avant</div>
+                  <div className="font-semibold text-left">{strings.dashboard.products.highlight}</div>
                 </th>
                 <th className="p-2 whitespace-nowrap">
                   <div className="font-semibold text-left"></div>
@@ -199,7 +200,7 @@ if(data.length !== 0){
             
             <tbody className="text-sm divide-y divide-gray-100">
                 {items}                  
-</tbody>: <p>Aucun produit n'est associé au serveur.</p>}
+</tbody>: <p>{strings.dashboard.products.null}</p>}
            
           </table>
 
@@ -244,13 +245,13 @@ if(data.length !== 0){
 
                 <div className="mt-3 sm:mt-5">
                   <Dialog.Title as="h3" className="text-lg text-center leading-6 font-medium text-gray-900">
-                    Modification de la fiche produit <strong>{value.name}</strong>
+                  {strings.formatString(strings.dashboard.products['product-modal'].title, {product: <strong>{value.name}</strong>})}
                   </Dialog.Title>
                   <div>
                   {showEmoji?null:
                   <div className="mt-2">
                     <label htmlFor="nom" className="block text-sm font-medium text-gray-700">
-                      Nom
+                      {strings.dashboard.products['product-modal'].name}
                     </label>
                     <div className="mt-1">
                       <input type="text" name="nom" id="nom" className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder={value.name} onChange={(e) => {setFormName(e.target.value)}}/>
@@ -258,7 +259,7 @@ if(data.length !== 0){
                   </div>}
                   {showEmoji?null:<div className="mt-2">
                     <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-                      Description
+                      {strings.dashboard.products['product-modal'].description}
                     </label>
                     <div className="mt-1">
                       <textarea
@@ -275,7 +276,7 @@ if(data.length !== 0){
                   {showEmoji?null:
                   <div>
                   <label htmlFor="price" className="block text-sm font-medium text-gray-700">
-                    Prix
+                    {strings.dashboard.products['product-modal'].price}
                   </label>
                   <div className="mt-1 relative rounded-md shadow-sm">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -294,7 +295,7 @@ if(data.length !== 0){
                 {showEmoji?null:
                   <div className="mt-2">
                     <label htmlFor="type" className="block text-sm font-medium text-gray-700">
-                      Type
+                      {strings.dashboard.products['product-modal'].type}
                     </label>
                     <div className="mt-1">
                       <input type="text" name="type" id="type" className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder={value.type}  onChange={(e) => {setFormType(e.target.value)}}/>
@@ -303,7 +304,7 @@ if(data.length !== 0){
                   {showEmoji?null:
                   <div className="mt-2">
                     <label htmlFor="expiration" className="block text-sm font-medium text-gray-700">
-                      Nombre de jours après expiration
+                      {strings.dashboard.products['product-modal'].expire}
                     </label>
                     <div className="mt-1">
                       <input type="text" name="expiration" id="expiration" className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder={value.day}  onChange={(e) => {setFormDays(e.target.value)}}/>
@@ -312,7 +313,7 @@ if(data.length !== 0){
                   {showEmoji?null:
                   <div className="mt-2">
                     <label htmlFor="role" className="block text-sm font-medium text-gray-700">
-                      Identifiant du rôle
+                      {strings.dashboard.products['product-modal'].roleId}
                     </label>
                     <div className="mt-1">
                       <input type="text" name="role" id="role" className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder={value.roleId} onChange={(e) => {setFormRole(e.target.value)}}/>
@@ -322,10 +323,10 @@ if(data.length !== 0){
                 </div>
                 <div className="text-center mt-2 items-center">
                     <label htmlFor="emoji" className="block text-sm font-medium text-gray-700">
-                      Emoji sélectionné: {chosenEmoji ? (
+                      {strings.dashboard.products['product-modal'].selectedEmoji} {chosenEmoji ? (
                     <span>{chosenEmoji.emoji}</span>
                     ) : (
-                    <span>aucun</span>
+                    <span>{strings.dashboard.products['product-modal'].null}</span>
                     )}
                     </label>
                     <div>
@@ -336,7 +337,7 @@ if(data.length !== 0){
         className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white mt-1 bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
       >
         <EmojiHappyIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
-        {showEmoji?"Fermer le sélecteur d'émoji": "Sélectionner un émoji"}
+        {showEmoji?strings.dashboard.products['product-modal'].close: strings.dashboard.products['product-modal'].select}
       </button>                   
                 </div>
                   </div> 
@@ -351,7 +352,7 @@ if(data.length !== 0){
                   {update? <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-        </svg>: 'Mettre à jour la fiche produit'}
+        </svg>: strings.dashboard.products['product-modal'].confirm}
                   
                 </button>
               </div>
@@ -405,11 +406,11 @@ if(data.length !== 0){
                 </div>
                 <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                   <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
-                    Supprimer le produit {deleteName}
+                  {strings.formatString(strings.dashboard.products['product-modal-delete'].title, {product: deleteName})}
                   </Dialog.Title>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                      Attention, la supression du produit est irréverssible. Veuillez confirmer cette action.
+                      {strings.dashboard.products['product-modal-delete'].body}
                     </p>
                   </div>
                 </div>
@@ -420,7 +421,7 @@ if(data.length !== 0){
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
                   onClick={() => {setOpenModaleDelete(false); deleteProduct(deleteIndex); }}
                 >
-                  Supprimer
+                  {strings.dashboard.products['product-modal-delete'].delete}
                 </button>
                 <button
                   type="button"
@@ -428,7 +429,7 @@ if(data.length !== 0){
                   onClick={() => setOpenModaleDelete(false)}
                   ref={cancelButtonRef}
                 >
-                  Annuler
+                  {strings.dashboard.products['product-modal-delete'].cancel}
                 </button>
               </div>
             </div>
@@ -475,13 +476,13 @@ if(data.length !== 0){
 
                 <div className="mt-3 sm:mt-5">
                   <Dialog.Title as="h3" className="text-lg text-center leading-6 font-medium text-gray-900">
-                    Ajouter un nouveau produit
+                    {strings.dashboard.products.add}
                   </Dialog.Title>
                   <div>
                   {showEmoji?null:
                   <div className="mt-2">
                     <label htmlFor="nom" className="block text-sm font-medium text-gray-700">
-                      Nom
+                      {strings.dashboard.products['product-modal'].name}
                     </label>
                     <div className="mt-1">
                       <input type="text" value={formName} name="nom" id="nom" className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" onChange={(e) => {setFormName(e.target.value)}}/>
@@ -489,7 +490,7 @@ if(data.length !== 0){
                   </div>}
                   {showEmoji?null:<div className="mt-2">
                     <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-                      Description
+                      {strings.dashboard.products['product-modal'].description}
                     </label>
                     <div className="mt-1">
                       <textarea
@@ -505,7 +506,7 @@ if(data.length !== 0){
                   {showEmoji?null:
                   <div>
                   <label htmlFor="price" className="block text-sm font-medium text-gray-700">
-                    Prix
+                    {strings.dashboard.products['product-modal'].price}
                   </label>
                   <div className="mt-1 relative rounded-md shadow-sm">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -524,7 +525,7 @@ if(data.length !== 0){
                 {showEmoji?null:
                   <div className="mt-2">
                     <label htmlFor="type" className="block text-sm font-medium text-gray-700">
-                      Type
+                      {strings.dashboard.products['product-modal'].type}
                     </label>
                     <div className="mt-1">
                       <input type="text" name="type" id="type" value={formType} className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" onChange={(e) => {setFormType(e.target.value)}}/>
@@ -533,7 +534,7 @@ if(data.length !== 0){
                   {showEmoji?null:
                   <div className="mt-2">
                     <label htmlFor="expiration" className="block text-sm font-medium text-gray-700">
-                      Nombre de jours après expiration
+                      {strings.dashboard.products['product-modal'].expire}
                     </label>
                     <div className="mt-1">
                       <input type="text" name="expiration" value={formDays}id="expiration" className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" onChange={(e) => {setFormDays(e.target.value)}}/>
@@ -542,7 +543,7 @@ if(data.length !== 0){
                   {showEmoji?null:
                   <div className="mt-2">
                     <label htmlFor="role" className="block text-sm font-medium text-gray-700">
-                      Identifiant du rôle
+                      {strings.dashboard.products['product-modal'].roleId}
                     </label>
                     <div className="mt-1">
                       <input type="text" name="role" id="role" value={formRole} className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" onChange={(e) => {setFormRole(e.target.value)}}/>
@@ -552,10 +553,10 @@ if(data.length !== 0){
                 </div>
                 <div className="text-center mt-2 items-center">
                     <label htmlFor="emoji" className="block text-sm font-medium text-gray-700">
-                      Emoji sélectionné: {chosenEmoji ? (
+                      {strings.dashboard.products['product-modal'].selectedEmoji} {chosenEmoji ? (
                     <span>{chosenEmoji.emoji}</span>
                     ) : (
-                    <span>aucun</span>
+                    <span>{strings.dashboard.products['product-modal'].null}</span>
                     )}
                     </label>
                     <div>
@@ -566,7 +567,7 @@ if(data.length !== 0){
         className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white mt-1 bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
       >
         <EmojiHappyIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
-        {showEmoji?"Fermer le sélecteur d'émoji": "Sélectionner un émoji"}
+        {showEmoji?strings.dashboard.products['product-modal'].close: strings.dashboard.products['product-modal'].select}
       </button>                   
                 </div>
                   </div> 
@@ -581,7 +582,7 @@ if(data.length !== 0){
                   {update? <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-        </svg>: 'Créer un nouveau produit'}
+        </svg>: strings.dashboard.products.add}
                   
                 </button>
               </div>
@@ -633,11 +634,11 @@ if(data.length !== 0){
                 </div>
                 <div className="mt-3 text-center sm:mt-5">
                   <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
-                    Mise en avant
+                    {strings.dashboard.products['highlight-modal'].title}
                   </Dialog.Title>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                      Souhaitez-vous mettre en avant le produit <strong>{highlightName}</strong> ? En le mettant en avant, il sera accessible via la commande !shop sur votre serveur Discord, et sera affiché en premier dans votre boutique (<a href={shopLink}>{shopLink}</a>). Vous pouvez désactiver la mise en avant de votre produit en revenant dans ce menu.
+                    {strings.formatString(strings.dashboard.products['highlight-modal'].body, {name: <strong>{highlightName}</strong>, serverId: <a href={shopLink}>{shopLink}</a>})}
                     </p>
                   </div>
                 </div>
@@ -648,7 +649,7 @@ if(data.length !== 0){
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm"
                   onClick={() => {setHighlight(highlightIndex, true);setOpenModaleHighlight(false)}}
                 >
-                  Mettre en avant
+                  {strings.dashboard.products['highlight-modal'].confirm}
                 </button>
                 <button
                   type="button"
@@ -656,7 +657,7 @@ if(data.length !== 0){
                   onClick={() => {setHighlight(highlightIndex, false);setOpenModaleHighlight(false)}}
                   ref={cancelButtonRef}
                 >
-                  Désactiver
+                  {strings.dashboard.products['highlight-modal'].desactivate}
                 </button>
               </div>
             </div>

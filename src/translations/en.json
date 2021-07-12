@@ -1,0 +1,244 @@
+{
+  "auth": {
+    "guilds": {
+      "loading": "Loading your servers...",
+      "subtitle": "manage your store:",
+      "title": "Choose the server on which you want"
+    },
+    "login": {
+      "error": "An error has just occurred. Please check the development console.",
+      "loading": "Loading...",
+      "success": "You are now logged in. Redirecting in a few seconds..."
+    }
+  },
+  "dashboard": {
+    "help": {
+      "documentation": "Documentation",
+      "support": "Support",
+      "title": "Need help?"
+    },
+    "home": {
+      "cards": {
+        "customers": "Number of customers",
+        "products": "Active products",
+        "turnover": "Revenues"
+      },
+      "transactions-lookup": {
+        "emoji": "Emoji",
+        "name": "Product name",
+        "price": "Amount",
+        "time": "Date and time of transaction",
+        "title": "Your last ten customers",
+        "username": "Customer username",
+        "loading": "Loading of your stats...",
+        "null": "You do not have any transactions."
+      },
+      "welcomebanner": {
+        "server": "Connected to {server}.",
+        "subtitle": "Let's take a look at your shop:",
+        "title": "Hello, {name}."
+      }
+    },
+    "products": {
+      "null": "There is any products link to your server",
+      "activate": "Activated",
+      "add": "Add a product",
+      "desactivate": "Disabled",
+      "emoji": "Emoji",
+      "highlight": "Highlight",
+      "highlight-modal": {
+        "body": "Would you like to highlight the {name} product? By putting it forward, it will be accessible via the command !shop on your Discord server, and will be displayed first in your shop ({serverId}). You can turn off the focus of your product by returning to this menu.",
+        "confirm": "Highlight",
+        "desactivate": "Disabled",
+        "title": "Highlight"
+      },
+      "id": "Product id",
+      "name": "Name",
+      "pagination": "Showing {index} to {next} on {total} items.",
+      "price": "price",
+      "product-modal": {
+        "confirm": "Update the product",
+        "description": "Description",
+        "expire": "Number of days after expiry",
+        "name": "Name",
+        "null": "None",
+        "price": "price",
+        "roleId": "Role ID",
+        "select": "Select an emoji",
+        "close": "Close",
+        "selectedEmoji": "Selected Emoji:",
+        "title": "Editing the product {product}",
+        "type": "Type"
+      },
+      "product-modal-delete": {
+        "title": "Delete the product {product}",
+        "body": "Please note that the removal of the product is irreversible. Please confirm this action.",
+        "delete": "Delete",
+        "cancel": "Cancel"
+      },
+      "title": "Manage your products",
+      "type": "Type"
+    },
+    "settings": {
+      "confirm": "Confirm",
+      "delete": {
+        "delete": "Delete my server on octorole",
+        "delete-modal": {
+          "body": "Be careful, this action is irreversible. Any confirmation will result in the deletion of all data associated with this server. Are you sure?",
+          "cancel": "Cancel",
+          "confirm": "Desactivate my server",
+          "title": "Remove {server} from octorole"
+        },
+        "subtitle": "Once the server is deleted, it will be impossible to retrieve transactions, products, and other information.",
+        "title": "Delete my server on octorole"
+      },
+      "paypal": {
+        "subtitle": "Enter your Paypal Business address below to receive your payments made on octorole!",
+        "title": "Add my Paypal address"
+      },
+      "shop": {
+        "bannerLink": "Banner link",
+        "bannerMessage": "Banner message",
+        "description": "Description",
+        "setBannerSubtitle": "Display a custom banner on your store page.",
+        "setBannerTitle": "Activate the banner",
+        "subtitle": "Modify the page of your shop here to make it unique as your server!",
+        "title": "Change my shop page"
+      }
+    },
+    "sidebar": {
+      "administration": "Administration",
+      "navigation": "Navigation",
+      "products": "Products",
+      "settings": "Settings",
+      "transactions": "Transactions"
+    },
+    "title": "Administration Panel",
+    "transactions": {
+      "active": "Active",
+      "expiration": "Expiration date",
+      "inactive": "Inactive",
+      "pagination": "Showing {index} to {next} on {total} items.",
+      "price": "Price",
+      "product": "Product",
+      "provider": "Provider",
+      "state": "State",
+      "title": "All your transactions",
+      "transaction-modal": {
+        "claimed": "Retrieved on:",
+        "close": "Close",
+        "expire": "Expires on:",
+        "price": "Amount",
+        "product": "Product",
+        "provider": "Payment made through:",
+        "time": "Date and time of creation:",
+        "title": "Lookup on transaction #{id}",
+        "userId": "User ID/username:"
+      },
+      "transactionId": "Transaction ID",
+      "userId": "Username id"
+    },
+    "user-menu": {
+      "change": "Change server",
+      "logout": "Sign out",
+      "server": "Connected to {server}."
+    }
+  },
+  "home_page": {
+    "cta": {
+      "documentation": "Read the documentation",
+      "invite": "Invite octorole",
+      "subtitle": "Join us right now.",
+      "title": "Ready to get started?"
+    },
+    "features": [
+      {
+        "description": "No bank information passes through our accounts. Payment is made from the user's account to your PayPal account directly. And as a bonus, bank cards are accepted!",
+        "name": "Secure"
+      },
+      {
+        "description": "We do not take any additional charges. You will only pay the service charges incurred by the use of Paypal.",
+        "name": "No Hidden Fees"
+      },
+      {
+        "description": "As soon as the payment is made, the user receives his role directly on your server.",
+        "name": "Instant Payment"
+      },
+      {
+        "description": "The player receives an alert by private message as soon as their role has expired, inviting them to renew the player. No more forgetfulness of possible!",
+        "name": "Expiration Alert"
+      }
+    ],
+    "footer": [
+      {
+        "name": "Legal notices"
+      },
+      {
+        "name": "Privacy Policy"
+      },
+      {
+        "name": "Manage my cookies"
+      },
+      {
+        "rights": "All rights reserved."
+      }
+    ],
+    "hero": {
+      "stats": "Octorole contributes to {servers}, carried by more than {members}.",
+      "subtitle": "Discord shop",
+      "title": "Make simple your",
+      "servers": "servers",
+      "members": "members"
+    },
+    "infos": {
+      "title": "Why can you trust octorole?"
+    },
+    "navigation": [
+      {
+        "name": "Documentation"
+      },
+      {
+        "name": "Official Discord Server"
+      },
+      {
+        "name": "Status"
+      },
+      {
+        "name": "Admin Panel"
+      },
+      {
+        "name": "Invite octorole"
+      }
+    ]
+  },
+  "miscellaneous": {
+    "close": "Close",
+    "error_request": "An error occurred while querying:",
+    "lang": "Switch language in French"
+  },
+  "shop": {
+    "product": {
+      "account": "You are logged in to the Discord {discord} account.",
+      "link": "click here",
+      "login": "Log in to my Discord account",
+      "logout": "To disconnect, ",
+      "price": "You will be charged {price} € for this role.",
+      "server": "You are on the product page of server {server} (id: {id}).",
+      "time": "Your role will be withdrawn after {days} days.",
+      "type": " This product is {type}.",
+      "transaction-confirm-title": "Transaction confirmed",
+      "transaction-confirm-body": "Your confirmation number is {orderId}. You will receive your role in few minutes. If you do not receive your role within the next five minutes, {clickHere}.",
+      "transaction-confirm-clickhere": "click here"
+    },
+    "server": {
+      "buy": "Buy",
+      "highlights": "Our products highlighted:",
+      "products": "Our other products:",
+      "product": "Our products:",
+      "return": "Return to octorole.xyz",
+      "close": "Close",
+      "null": "There is no products on this server.",
+      "title": "Welcome on the {server}'s shop!"
+    }
+  }
+}

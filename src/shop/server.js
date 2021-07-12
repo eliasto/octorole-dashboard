@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logo from '../images/logo-without-text.png'
+import logo from '../images/logo-transparent.png'
 import axios from "axios";
 import {apipath} from '../config.json'
-import { SpeakerphoneIcon, XIcon } from '@heroicons/react/outline'
+import { SpeakerphoneIcon, XIcon } from '@heroicons/react/outline';
+import {strings} from '../translations/lang'
 
 function Server() {
     const location = useLocation();
@@ -70,7 +71,7 @@ function Server() {
                       href="#"
                       className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700"
                     >
-                      Retourner sur octorole.xyz
+                      {strings.shop.server.return}
                     </Link>
                   </div>
                 </nav>
@@ -78,7 +79,7 @@ function Server() {
                     <svg xmlns="http://www.w3.org/2000/svg" className="bg-purple-500 p-2 object-center rounded-full w-12 h-12 block m-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
   <path stroke-linecap="round" stroke-linejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
 </svg>
-                    <h1 className="text-3xl font-bold text-center">Bienvenue sur la boutique de {data.name}</h1>
+                    <h1 className="text-3xl font-bold text-center">{strings.formatString(strings.shop.server.title, {server: data.name})}</h1>
                     <p className="text-xl text-center">{data.description}</p>
                 </div>
 
@@ -88,7 +89,7 @@ function Server() {
         <div className="relative lg:grid lg:grid-cols-3 lg:gap-x-8 mb-10">
           <div className="lg:col-span-1">
             <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-              Nos produits mis en avant:
+              {strings.shop.server.highlights}
             </h2>
           </div>
           <dl className="mt-10 space-y-10 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-10 lg:mt-0 lg:col-span-2">
@@ -106,7 +107,7 @@ function Server() {
                           href="#"
                           className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 mt-2"
                         >
-                          Acheter
+                          {strings.shop.server.buy}
                         </Link>
                   </div>
              
@@ -117,7 +118,7 @@ function Server() {
             </div>:null}
               
 
-        <h1 className="text-2xl font-bold text-center text-white p-10">{highlighted.length >0?"Nos autres produits:": "Nos produits:"}</h1>
+        <h1 className="text-2xl font-bold text-center text-white p-10">{highlighted.length >0?strings.shop.server.products: strings.shop.server.product}</h1>
         <div className="rounded-lg bg-gray-800 overflow-hidden shadow divide-y divide-gray-800 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-px">
             {(data.products.length > 0)?
       data.products.map((action, actionIdx) => (
@@ -162,7 +163,7 @@ function Server() {
           <span className="text-xl font-bold absolute bottom-0 right-0 p-5 text-white">{action.price} €</span>
           </Link>
         </div>
-      )):<p className="text-center text-white">Aucun produit n'a été ajouté à cette boutique.</p>}
+      )):<p className="text-center text-white">{strings.shop.server.null}</p>}
     </div>
 
 
@@ -195,7 +196,7 @@ function Server() {
                   type="button"
                   className="-mr-1 flex p-2 rounded-md hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-white sm:-mr-2"
                 >
-                  <span className="sr-only">Fermer</span>
+                  <span className="sr-only">{strings.shop.server.close}</span>
                   <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
                 </button>
               </div>

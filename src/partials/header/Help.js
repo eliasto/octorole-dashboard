@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Transition from '../../utils/Transition';
+import {strings} from '../../translations/lang'
 
 function Help() {
 
@@ -58,7 +59,7 @@ function Help() {
           onFocus={() => setDropdownOpen(true)}
           onBlur={() => setDropdownOpen(false)}
         >
-          <div className="text-xs font-semibold text-gray-400 uppercase pt-1.5 pb-2 px-4">Besoin d'aide ?</div>
+          <div className="text-xs font-semibold text-gray-400 uppercase pt-1.5 pb-2 px-4">{strings.dashboard.help.title}</div>
           <ul>
             <li>
               <a
@@ -70,7 +71,7 @@ function Help() {
                   <rect y="3" width="12" height="9" rx="1" />
                   <path d="M2 0h8v2H2z" />
                 </svg>
-                <span>Documentation</span>
+                <span>{strings.dashboard.help.documentation}</span>
               </a>
             </li>
             <li>
@@ -82,7 +83,7 @@ function Help() {
                 <svg className="w-3 h-3 fill-current text-indigo-300 flex-shrink-0 mr-2" viewBox="0 0 12 12">
                   <path d="M10.5 0h-9A1.5 1.5 0 000 1.5v9A1.5 1.5 0 001.5 12h9a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0010.5 0zM10 7L8.207 5.207l-3 3-1.414-1.414 3-3L5 2h5v5z" />
                 </svg>
-                <span>Support</span>
+                <span>{strings.dashboard.help.support}</span>
               </a>
             </li>
           </ul>

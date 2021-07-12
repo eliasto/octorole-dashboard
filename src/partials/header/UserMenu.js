@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Transition from '../../utils/Transition';
-import {sitepath} from '../../config.json'
+import {sitepath} from '../../config.json';
+import {strings} from '../../translations/lang'
 
 function UserMenu() {
 
@@ -79,8 +80,8 @@ function UserMenu() {
           onBlur={() => setDropdownOpen(false)}
         >
           <div className="pt-0.5 pb-2 px-3 mb-1 border-b border-gray-200">
-            <div className="font-medium text-gray-800">Elias</div>
-            <div className="text-xs text-gray-500 italic">Connecté sur <strong>{localStorage.getItem('guildName')}</strong></div>
+            <div className="font-medium text-gray-800">{localStorage.getItem('username').split('#')[0]}</div>
+            <div className="text-xs text-gray-500 italic">{strings.formatString(strings.dashboard['user-menu'].server, {server: <strong>{localStorage.getItem('guildName')}</strong>})}</div>
           </div>
           <ul>
             <li>
@@ -88,7 +89,7 @@ function UserMenu() {
                 className="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
                 to="/auth/guilds"
               >
-                Changer de serveur
+                {strings.dashboard['user-menu'].change}
               </Link>
             </li>
             <li>
@@ -99,7 +100,7 @@ function UserMenu() {
                   logout()
                 }}
               >
-                Se déconnecter
+                {strings.dashboard['user-menu'].logout}
               </Link>
             </li>
           </ul>

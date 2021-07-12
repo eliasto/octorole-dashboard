@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {apipath} from '../../config.json';
+import {strings} from '../../translations/lang';
 
 // Import utilities
 
@@ -31,7 +32,7 @@ render(){
   <path stroke-linecap="round" stroke-linejoin="round" strokeWidth="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
 </svg>
         </header>
-        <h2 className="text-lg font-semibold text-gray-800 mb-2">Produits actifs</h2>
+        <h2 className="text-lg font-semibold text-gray-800 mb-2">{strings.dashboard.home.cards.products}</h2>
         <div className="flex items-start">
           <div className="text-3xl font-bold text-gray-800 mr-2">{this.state.value}</div>
         </div>

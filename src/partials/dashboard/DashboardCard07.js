@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import {apipath} from '../../config.json';
+import {strings} from '../../translations/lang';
 
 function DashboardCard07() {
   if(localStorage.getItem('jwt') == null){
@@ -63,7 +64,7 @@ for(let i = 0;i<length;i++){
   return (
     <div className="col-span-full xl:col-span-12 bg-white shadow-lg rounded-sm border border-gray-200">
       <header className="px-5 py-4 border-b border-gray-100">
-        <h2 className="font-semibold text-gray-800">Vos dix derniers clients</h2>
+        <h2 className="font-semibold text-gray-800">{strings.dashboard.home['transactions-lookup'].title}</h2>
       </header>
       <div className="p-3">
         {/* Table */}
@@ -73,19 +74,19 @@ for(let i = 0;i<length;i++){
             <thead className="text-xs uppercase text-gray-400 bg-gray-50 rounded-sm">
               <tr>
                 <th className="p-2">
-                  <div className="font-semibold text-left">Emoji</div>
+                  <div className="font-semibold text-left">{strings.dashboard.home['transactions-lookup'].emoji}</div>
                 </th>
                 <th className="p-2">
-                  <div className="font-semibold text-center">Nom du produit</div>
+                  <div className="font-semibold text-center">{strings.dashboard.home['transactions-lookup'].name}</div>
                 </th>
                 <th className="p-2">
-                  <div className="font-semibold text-center">Montant</div>
+                  <div className="font-semibold text-center">{strings.dashboard.home['transactions-lookup'].price}</div>
                 </th>
                 <th className="p-2">
-                  <div className="font-semibold text-center">Pseudonyme du client</div>
+                  <div className="font-semibold text-center">{strings.dashboard.home['transactions-lookup'].username}</div>
                 </th>
                 <th className="p-2">
-                  <div className="font-semibold text-center">Date et heure de la transaction</div>
+                  <div className="font-semibold text-center">{strings.dashboard.home['transactions-lookup'].time}</div>
                 </th>
               </tr>
             </thead>
@@ -95,8 +96,8 @@ for(let i = 0;i<length;i++){
               {view}
             </tbody>
           </table>
-          {(loading? <p className="text-center">Chargement de vos statistiques...</p>: null)}
-          {((!loading && items.length === 0)? <p className="text-center">Aucune transanctions d'enregistrées.</p>: null)}
+          {(loading? <p className="text-center">{strings.dashboard.home['transactions-lookup'].loading}</p>: null)}
+          {((!loading && items.length === 0)? <p className="text-center">{strings.dashboard.home['transactions-lookup'].null}</p>: null)}
 
 
         </div>

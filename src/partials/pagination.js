@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/jsx-no-comment-textnodes */
 
+import {strings} from '../translations/lang';
+
 export default function Pagination({count, setCount, max}) {
   var nextValue = 10*(count+1);
   if(nextValue >= max){
@@ -24,8 +26,7 @@ export default function Pagination({count, setCount, max}) {
     >
       <div className="hidden sm:block">
         <p className="text-sm text-gray-700">
-          Affichage de <span className="font-medium">{previousValue}</span> à <span className="font-medium">{nextValue}</span> sur{' '}
-          <span className="font-medium">{max}</span> éléments.
+        {strings.formatString(strings.dashboard.products.pagination, {index:<span className="font-medium">{previousValue}</span>, next:<span className="font-medium">{nextValue}</span>, total:<span className="font-medium">{max}</span>})}
         </p>
       </div>
       <div className="flex-1 flex justify-between sm:justify-end">

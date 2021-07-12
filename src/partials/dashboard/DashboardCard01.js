@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {apipath} from '../../config.json';
+import {strings} from '../../translations/lang';
 
 export default class DashboardCard01 extends React.Component {
 
@@ -31,7 +32,7 @@ render(){
   <path stroke-linecap="round" stroke-linejoin="round" strokeWidth="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
 </svg>
         </header>
-        <h2 className="text-lg font-semibold text-gray-800 mb-2">Nombre de clients</h2>
+        <h2 className="text-lg font-semibold text-gray-800 mb-2">{strings.dashboard.home.cards.customers}</h2>
         <div className="flex items-start">
           <div className="text-3xl font-bold text-gray-800 mr-2">{this.state.value}</div>
         </div>

@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from 'react';
-import {apipath} from '../config.json'
+import {apipath} from '../config.json';
+import {strings} from '../translations/lang';
 
 class Guilds extends React.Component {
 
@@ -119,8 +120,8 @@ render(){
     <div>
   <div className="flex h-screen justify-center items-center">
     <div className="text-center bg-white p-10 rounded-lg shadow-lg">
-    <h1 className="font-bold mb-2 text-indigo-600 text-xl">Choisissez le serveur sur lequel vous souhaitez < br/>administrer votre boutique:</h1>
-    {(this.state.loading? <p>Chargement de vos serveurs...</p>: null)}
+    <h1 className="font-bold mb-2 text-indigo-600 text-xl">{strings.auth.guilds.title} < br/>{strings.auth.guilds.subtitle}</h1>
+    {(this.state.loading? <p>{strings.auth.guilds.loading}</p>: null)}
     { 
     // eslint-disable-next-line array-callback-return
     this.state.items.map((item) => {

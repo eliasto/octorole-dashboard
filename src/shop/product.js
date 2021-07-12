@@ -3,7 +3,8 @@ import { useLocation, Link } from "react-router-dom";
 import axios from "axios";
 import {apipath, sitepath} from '../config.json';
 import { InformationCircleIcon, CalendarIcon, CurrencyEuroIcon, CheckCircleIcon  } from '@heroicons/react/solid'
-import {PayPalButton} from 'react-paypal-button-v2'
+import {PayPalButton} from 'react-paypal-button-v2';
+import {strings} from '../translations/lang';
 
 function Product() {
 
@@ -69,10 +70,10 @@ function Product() {
         </div>
         <div className="ml-3">
           <p className="text-lg text-green-900 font-bold">
-          Transaction effectuée
+          {strings.shop.product['transaction-confirm-title']}
           </p>
           <p className="text-sm text-green-700">
-            Votre numéro de confirmation est le <span className="font-bold">{orderId}</span>. Votre rôle devrait arriver d'ici quelques minutes. Si vous n'avez toujours pas reçu votre rôle dans les minutes qui suivent, <a className="text-green-900" href="https://doc.octorole.xyz">cliquez-ici</a>.
+          {strings.formatString(strings.shop.product['transaction-confirm-body'], {orderId:<span className="font-bold">{orderId}</span>, clickHere: <a className="text-green-900" href="https://doc.octorole.xyz">{strings.shop.product['transaction-confirm-clickhere']}</a>})}
           </p>
         </div>
       </div>
@@ -82,9 +83,9 @@ function Product() {
     <p className="mt-2 text-gray-600">{data.description}</p>
     <hr></hr>
     <div className="mt-3">
-      <div><InformationCircleIcon className="w-5 h-5 inline-block mr-1"/> Ce produit est <span className="font-bold"> {data.type}</span>.</div>
-      <div><CalendarIcon className="w-5 h-5 inline-block mr-1"/> Votre rôle vous sera retiré au bout de <span className="font-bold"> {data.day} jours</span>.</div>
-      <div><CurrencyEuroIcon className="w-5 h-5 inline-block mr-1"/> Vous serez débité de <span className="font-bold"> {data.price} €</span> pour ce rôle.</div>
+      <div><InformationCircleIcon className="w-5 h-5 inline-block mr-1"/>{strings.formatString(strings.shop.product.type, {type:<span className="font-bold">{data.type}</span>})}</div>
+      <div><CalendarIcon className="w-5 h-5 inline-block mr-1"/>{strings.formatString(strings.shop.product.time, {days:<span className="font-bold">{data.day}</span>})}</div>
+      <div><CurrencyEuroIcon className="w-5 h-5 inline-block mr-1"/>{strings.formatString(strings.shop.product.price, {price:<span className="font-bold">{data.price}</span>})}</div>
     </div>
     <div className="mt-5 text-center text-xs">
       {discord?<PayPalButton
@@ -122,14 +123,14 @@ function Product() {
         type="button"
         className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
       >
-        Se connecter à mon compte Discord
+        {strings.shop.product.login}
       </button>}
-      <p className="mt-4">Vous êtes sur la fiche produit du serveur {data.server.name} (id: {data.server.guildId}).</p>
+      <p className="mt-4">{strings.formatString(strings.shop.product.server, {server: data.server.name, id: data.server.guildId})}</p>
     </div>
   </div>
 </div>
         <div>
-          {discord?<div><p className="text-center text-white text-sm">Vous êtes connecté sur le compte Discord <span className="font-bold">{localStorage.getItem('discord_client_name')}</span>.</p><p className="text-center text-white text-sm">Pour vous déconnecter, <Link className="text-purple-300" onClick={() => disconnect()}> cliquez-ici.</Link></p></div>:null}
+        {discord?<div><p className="text-center text-white text-sm">{strings.formatString(strings.shop.product.account, {discord: <span className="font-bold">{localStorage.getItem('discord_client_name')}</span>})}</p><p className="text-center text-white text-sm">          {strings.formatString(strings.shop.product.logout, {clickHere: <Link className="text-purple-300" onClick={() => disconnect()}>{strings.shop.product.link}</Link> })}.</p></div>:null}
           </div>
 </div>}
       </div>

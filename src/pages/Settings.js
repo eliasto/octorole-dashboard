@@ -7,7 +7,8 @@ import {apipath} from '../config.json'
 
 import Sidebar from '../partials/Sidebar';
 import Header from '../partials/Header';
-import { Switch } from '@headlessui/react'
+import { Switch } from '@headlessui/react';
+import {strings} from '../translations/lang';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -165,14 +166,14 @@ async function ChangeShopData(){
         {/* Modifier le shop */}
         <div className="bg-white shadow sm:rounded-lg mb-5">
       <div className="px-4 py-5 sm:p-6">
-        <h3 className="text-lg leading-6 font-medium text-gray-900">Modifier la page de ma boutique</h3>
+        <h3 className="text-lg leading-6 font-medium text-gray-900">{strings.dashboard.settings.shop.title}</h3>
         <div className="mt-2 text-sm text-gray-500">
-          <p>Modifier ici la page de votre boutique pour la rendre unique comme votre serveur !</p>
+          <p>{strings.dashboard.settings.shop.subtitle}</p>
         </div>
         <div className="mt-5">
         <div className="mb-3">
       <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-        Description
+        {strings.dashboard.settings.shop.description}
       </label>
       <div className="mt-1">
         <input
@@ -187,7 +188,7 @@ async function ChangeShopData(){
     </div>
     <div className="mb-3">
       <label htmlFor="bannerMessage" className="block text-sm font-medium text-gray-700">
-        Message de la bannière
+        {strings.dashboard.settings.shop.bannerMessage}
       </label>
       <div className="mt-1">
         <input
@@ -202,7 +203,7 @@ async function ChangeShopData(){
     </div>
     <div className="mb-3">
       <label htmlFor="bannerLink" className="block text-sm font-medium text-gray-700">
-        Lien de la bannière
+        {strings.dashboard.settings.shop.bannerLink}
       </label>
       <div className="mt-1">
         <input
@@ -217,8 +218,8 @@ async function ChangeShopData(){
     </div>
     <Switch.Group as="div" className="flex items-center justify-between mb-3">
       <Switch.Label as="span" className="flex-grow flex flex-col" passive>
-        <span className="text-sm font-medium text-gray-900">Activer la bannière</span>
-        <span className="text-sm text-gray-500">Permet d'afficher une bannière personnalisé sur la page de votre boutique.</span>
+        <span className="text-sm font-medium text-gray-900">{strings.dashboard.settings.shop.setBannerTitle}</span>
+        <span className="text-sm text-gray-500">{strings.dashboard.settings.shop.setBannerSubtitle}</span>
       </Switch.Label>
       <Switch
         checked={bannerState}
@@ -228,7 +229,7 @@ async function ChangeShopData(){
           'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
         )}
       >
-        <span className="sr-only">Activer la bannière</span>
+        <span className="sr-only">{strings.dashboard.settings.shop.setBannerTitle}</span>
         <span
           aria-hidden="true"
           className={classNames(
@@ -246,7 +247,7 @@ async function ChangeShopData(){
             {isShopDataLoading?<svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-        </svg>: "Confirmer"}
+        </svg>: strings.dashboard.settings.confirm}
           </button>
         </div>
       </div>
@@ -255,9 +256,9 @@ async function ChangeShopData(){
             {/*Ajouter paypla */}
             <div className="bg-white shadow sm:rounded-lg mb-5">
       <div className="px-4 py-5 sm:p-6">
-        <h3 className="text-lg leading-6 font-medium text-gray-900">Ajouter mon adresse Paypal</h3>
+        <h3 className="text-lg leading-6 font-medium text-gray-900">{strings.dashboard.settings.paypal.title}</h3>
         <div className="mt-2 text-sm text-gray-500">
-          <p>Rentrez ci-dessous votre adresse Paypal Business pour recevoir vos paiement effectués sur octorole !</p>
+          <p>{strings.dashboard.settings.paypal.subtitle}</p>
         </div>
         <div className="mt-5">
         <div className="mb-3">
@@ -281,7 +282,7 @@ async function ChangeShopData(){
             {isPaypalLoading?<svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-        </svg>: "Confirmer"}
+        </svg>: strings.dashboard.settings.confirm}
           </button>
         </div>
       </div>
@@ -290,9 +291,9 @@ async function ChangeShopData(){
 {/* Alerte suppression */}
           <div className="bg-white shadow sm:rounded-lg">
       <div className="px-4 py-5 sm:p-6">
-        <h3 className="text-lg leading-6 font-medium text-gray-900">Supprimer le serveur d'octorole</h3>
+        <h3 className="text-lg leading-6 font-medium text-gray-900">{strings.dashboard.settings.delete.title}</h3>
         <div className="mt-2 text-sm text-gray-500">
-          <p>Une fois le serveur supprimé, il sera impossible de récupérer les transactions, produits et autres informations. {/*Si besoin, veillez à exporter toutes les transactions depuis l'onglet "Transaction" puis "Exporter".*/}</p>
+          <p>{strings.dashboard.settings.delete.subtitle} {/*Si besoin, veillez à exporter toutes les transactions depuis l'onglet "Transaction" puis "Exporter".*/}</p>
         </div>
         <div className="mt-5">
           <button
@@ -300,7 +301,7 @@ async function ChangeShopData(){
             type="button"
             className="inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:text-sm"
           >
-            Supprimer le serveur d'octorole
+            {strings.dashboard.settings.delete.delete}
           </button>
         </div>
       </div>
@@ -354,11 +355,11 @@ async function ChangeShopData(){
                   </div>
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                     <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
-                      Supprimer <strong>{localStorage.getItem('guildName')}</strong> d'octorole
+                    {strings.formatString(strings.dashboard.settings.delete['delete-modal'].title, {server: <strong>{localStorage.getItem('guildName')}</strong>})}
                     </Dialog.Title>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
-                        Attention, cette action est irréverssible. Toute suppression entraînera la suppression de toutes les données associées à ce serveur. En êtes-vous sûr ?
+                        {strings.dashboard.settings.delete['delete-modal'].body}
                       </p>
                     </div>
                   </div>
@@ -373,7 +374,7 @@ async function ChangeShopData(){
                   {isLoading?<svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-        </svg>: 'Désactiver mon serveur'}
+        </svg>: strings.dashboard.settings.delete['delete-modal'].confirm}
                 </button>
                 <button
                   type="button"
@@ -381,7 +382,7 @@ async function ChangeShopData(){
                   onClick={() => setOpen(false)}
                   ref={cancelButtonRef}
                 >
-                  Annuler
+                  {strings.dashboard.settings.delete['delete-modal'].cancel}
                 </button>
               </div>
             </div>

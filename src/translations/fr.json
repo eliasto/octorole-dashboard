@@ -1,0 +1,244 @@
+{
+  "auth": {
+    "login": {
+      "loading": "Chargement...",
+      "success": "Vous êtes désormais connecté. Redirection dans quelques secondes...",
+      "error": "Une erreur vient de se produire. Veuillez vérifier la console de développement."
+    },
+    "guilds": {
+      "title": "Choisissez le serveur sur lequel vous souhaitez",
+      "subtitle": "administrer votre boutique:",
+      "loading": "Chargement de vos serveurs..."
+    }
+  },
+  "dashboard": {
+    "home": {
+      "welcomebanner": {
+        "title": "Bonjour, {name}.",
+        "subtitle": "Jetons un coup d'oeil à votre boutique:",
+        "server": "Connecté sur {server}."
+      },
+      "cards": {
+        "customers": "Nombre de clients",
+        "products": "Produits actifs",
+        "turnover": "Revenues engrendrés"
+      },
+      "transactions-lookup": {
+        "title": "Vos dix derniers clients",
+        "emoji": "emoji",
+        "name": "Nom du produit",
+        "price": "Montant",
+        "username": "Pseudonyme du client",
+        "time": "Date et heure de la transaction",
+        "loading": "Chargement de vos statistiques...",
+        "null": "Aucune transanctions d'enregistrées."
+      }
+    },
+    "products": {
+      "null": "Aucun produit n'est associé au serveur.",
+      "title": "Gérer vos produits",
+      "add": "Ajouter un produit",
+      "pagination": "Affichage de {index} à {next} sur {total} éléments.",
+      "id": "Produit id",
+      "emoji": "emoji",
+      "name": "Nom",
+      "price": "Prix",
+      "type": "Type",
+      "highlight": "Mise en avant",
+      "activate": "Activé",
+      "desactivate": "Désactivé",
+      "highlight-modal": {
+        "title": "Mise en avant",
+        "body": "Souhaitez-vous mettre en avant le produit {name} ? En le mettant en avant, il sera accessible via la commande !shop sur votre serveur Discord, et sera affiché en premier dans votre boutique ({serverId}). Vous pouvez désactiver la mise en avant de votre produit en revenant dans ce menu.",
+        "confirm": "Mettre en avant",
+        "desactivate": "Désactivé"
+      },
+      "product-modal": {
+        "title": "Modification de la fiche produit {product}",
+        "name": "Nom",
+        "description": "Description",
+        "price": "Prix",
+        "type": "Type",
+        "expire": "Nombre de jours après expiration",
+        "roleId": "Identifiant du rôle",
+        "selectedEmoji": "Emoji sélectionné:",
+        "null": "Aucun",
+        "select": "Sélectionner un émoji",
+        "close": "Fermer le sélecteur d'émoji",
+        "confirm": "Mettre à jour la fiche produit"
+      },
+      "product-modal-delete": {
+        "title": "Supprimer le produit {product}",
+        "body": "Attention, la supression du produit est irréverssible. Veuillez confirmer cette action.",
+        "delete": "Supprimer",
+        "cancel": "Annuler"
+      }
+    },
+    "transactions": {
+      "title": "Toutes vos transactions",
+      "pagination": "Affichage de {index} à {next} sur {total} éléments.",
+      "userId": "Utilisateur id",
+      "transactionId": "Transaction id",
+      "provider": "Plateforme",
+      "product": "Produit",
+      "price": "Prix",
+      "expiration": "Date d'expiration",
+      "state": "Etat",
+      "active": "Actif",
+      "inactive": "Inactif",
+      "transaction-modal": {
+        "title": "Information sur la transaction #{id}",
+        "time": "Date et heure de la création:",
+        "userId": "Utilisateur id/pseudonyme:",
+        "expire": "Expire le:",
+        "claimed": "Récupéré le:",
+        "provider": "Paiement effectué par:",
+        "product": "Produit",
+        "price": "Montant",
+        "close": "Fermer"
+      }
+    },
+    "settings": {
+      "confirm": "Confirmer",
+      "shop": {
+        "title": "Modifier la page de ma boutique",
+        "subtitle": "Modifier ici la page de votre boutique pour la rendre unique comme votre serveur !",
+        "description": "Description",
+        "bannerMessage": "Message de la bannière",
+        "bannerLink": "Lien de la bannière",
+        "setBannerTitle": "Activer la bannière",
+        "setBannerSubtitle": "Permet d'afficher une bannière personnalisé sur la page de votre boutique."
+      },
+      "paypal": {
+        "title": "Ajouter mon adresse Paypal",
+        "subtitle": "Rentrez ci-dessous votre adresse Paypal Business pour recevoir vos paiement effectués sur octorole !"
+      },
+      "delete": {
+        "title": "Supprimer le serveur d'octorole",
+        "subtitle": "Une fois le serveur supprimé, il sera impossible de récupérer les transactions, produits et autres informations.",
+        "delete": "Supprimer le serveur d'octorole",
+        "delete-modal": {
+          "title": "Supprimer {server} d'octorole",
+          "body": "Attention, cette action est irréverssible. Toute suppression entraînera la suppression de toutes les données associées à ce serveur. En êtes-vous sûr ?",
+          "cancel": "Annuler",
+          "confirm": "Désactiver mon serveur"
+        }
+      }
+    },
+    "sidebar": {
+      "navigation": "Navigation",
+      "administration": "Administration",
+      "products": "Produits",
+      "transactions": "Transactions",
+      "settings": "Paramètres"
+    },
+    "user-menu": {
+      "server": "Connecté sur {server}.",
+      "change": "Changer de serveur",
+      "logout": "Se déconnecter"
+    },
+    "help": {
+      "title": "Besoin d'aide ?",
+      "documentation": "Documentation",
+      "support": "support"
+    },
+    "title": "Panel d'administration"
+  },
+  "home_page": {
+    "features": [
+      {
+        "name": "Sécurisé",
+        "description": "Aucune information bancaire ne transite via nos comptes. Le paiement se fait du compte de l'utilisateur à votre compte Paypal directement. Et en prime, les cartes bancaires sont acceptées !"
+      },
+      {
+        "name": "Aucun frais cachés",
+        "description": "Nous ne prenons aucun frais additionnels. Vous ne paierez que les frais de service engendrés par l'utilisation de Paypal."
+      },
+      {
+        "name": "Paiement instantanné",
+        "description": "Dès que le paiement est effectué, l'utilisateur reçoit directement son rôle sur votre serveur."
+      },
+      {
+        "name": "Alerte d'expiration",
+        "description": "Le joueur reçoit une alerte par message privé dès que son rôle a expiré, l'invitant ainsi à le renoulever. Plus aucun oubli de possible !"
+      }
+    ],
+    "footer": [
+      {
+        "name": "Mentions légales"
+      },
+      {
+        "name": "Politique de confidentalités"
+      },
+      {
+        "name": "Gérer mes cookies"
+      },
+      {
+        "rights": "Tous droits réservés."
+      }
+    ],
+    "navigation": [
+      {
+        "name": "Documentation"
+      },
+      {
+        "name": "Serveur Discord officiel"
+      },
+      {
+        "name": "Status"
+      },
+      {
+        "name": "Panneau d'administration"
+      },
+      {
+        "name": "Inviter octorole"
+      }
+    ],
+    "hero": {
+      "title": "Rendre simple votre",
+      "subtitle": "boutique Discord",
+      "stats": "Octorole contribue à {servers} serveurs, portés par plus de {members} membres.",
+      "servers": "serveurs",
+      "members": "membres"
+    },
+    "infos": {
+      "title": "Pourquoi faire confiance à octorole ?"
+    },
+    "cta": {
+      "title": "Prêt à vous lancer ?",
+      "subtitle": "Rejoignez-nous dès maintenant.",
+      "documentation": "Lire la documentation",
+      "invite": "Inviter octorole"
+    }
+  },
+  "miscellaneous": {
+    "error_request": "Une erreur s'est produite lors de la requête:",
+    "close": "Fermer",
+    "lang": "Changer la langue en anglais"
+  },
+  "shop": {
+    "server": {
+      "return": "Retourner sur octorole.xyz",
+      "highlights": "Nos produits mis en avant:",
+      "products": "Nos autres produits:",
+      "product": "Nos produits:",
+      "buy": "Acheter",
+      "close": "Fermer",
+      "null": "Aucun produit n'a été ajouté à cette boutique.",
+      "title": "Bienvenue sur la boutique de {server} !"
+    },
+    "product": {
+      "server": "Vous êtes sur la fiche produit du serveur {server} (id: {id}).",
+      "login": "Se connecter à mon compte Discord",
+      "type": " Ce produit est {type}.",
+      "price": "Vous serez débité de {price} € pour ce rôle.",
+      "time": "Votre rôle vous sera retiré au bout de {days} jours.",
+      "account": "Vous êtes connecté sur le compte Discord {discord}.",
+      "logout": "Pour vous déconnecter, {clickHere}",
+      "link": "cliquez-ici",
+      "transaction-confirm-title": "Transaction effectuée",
+      "transaction-confirm-body": "Votre numéro de confirmation est le {orderId}. Votre rôle devrait arriver d'ici quelques minutes. Si vous n'avez toujours pas reçu votre rôle dans les minutes qui suivent, {clickHere}.",
+      "transaction-confirm-clickhere": "cliquez-ici"
+    }
+  }
+}

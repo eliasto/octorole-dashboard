@@ -3,6 +3,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { InformationCircleIcon } from '@heroicons/react/outline'
 
 import Pagination from '../pagination';
+import {strings} from '../../translations/lang';
 
 function List(props) {
 
@@ -46,9 +47,9 @@ if(data.length !== 0){
           <div className="text-left font-medium">{date.toString().substring(0, date.toString().indexOf('(')-1)}</div>
         </td>
         {(data[data.length-i-1].active?                       <td className="p-2 whitespace-nowrap">
-          <div className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-green-100 bg-green-700 rounded">Actif</div>
+          <div className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-green-100 bg-green-700 rounded">{strings.dashboard.transactions.active}</div>
         </td>:                       <td className="p-2 whitespace-nowrap">
-          <div className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-700 rounded">Inactif</div>
+          <div className="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-700 rounded">{strings.dashboard.transactions.inactive}</div>
         </td>)}
         
         <td className="p-2 whitespace-nowrap">
@@ -65,7 +66,7 @@ if(data.length !== 0){
     <div>
     <div className="col-span-full xl:col-span-6 bg-white shadow-lg rounded-sm border border-gray-200">
       <header className="px-5 py-4 border-b border-gray-100">
-        <h2 className="font-semibold text-gray-800">Toutes vos transactions</h2>
+        <h2 className="font-semibold text-gray-800">{strings.dashboard.transactions.title}</h2>
       </header>
       <div className="p-3">
 
@@ -79,25 +80,25 @@ if(data.length !== 0){
                   <div className="font-semibold text-left">Id</div>
                 </th>
                 <th className="p-2 whitespace-nowrap">
-                  <div className="font-semibold text-left">Utilisateur id</div>
+                  <div className="font-semibold text-left">{strings.dashboard.transactions.userId}</div>
                 </th>
                 <th className="p-2 whitespace-nowrap">
-                  <div className="font-semibold text-left">Transaction id</div>
+                  <div className="font-semibold text-left">{strings.dashboard.transactions.transactionId}</div>
                 </th>
                 <th className="p-2 whitespace-nowrap">
-                  <div className="font-semibold text-left">Plateforme</div>
+                  <div className="font-semibold text-left">{strings.dashboard.transactions.provider}</div>
                 </th>
                 <th className="p-2 whitespace-nowrap">
-                  <div className="font-semibold text-left">Produit</div>
+                  <div className="font-semibold text-left">{strings.dashboard.transactions.product}</div>
                 </th>
                 <th className="p-2 whitespace-nowrap">
-                  <div className="font-semibold text-left">Prix</div>
+                  <div className="font-semibold text-left">{strings.dashboard.transactions.price}</div>
                 </th>
                 <th className="p-2 whitespace-nowrap">
-                  <div className="font-semibold text-left">Date d'expiration</div>
+                  <div className="font-semibold text-left">{strings.dashboard.transactions.expiration}</div>
                 </th>
                 <th className="p-2 whitespace-nowrap">
-                  <div className="font-semibold text-left">Etat</div>
+                  <div className="font-semibold text-left">{strings.dashboard.transactions.state}</div>
                 </th>
                 <th className="p-2 whitespace-nowrap">
                 </th>
@@ -151,29 +152,29 @@ if(data.length !== 0){
                 </div>
                 <div className="mt-3 text-center sm:mt-5">
                   <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
-                    Information sur la transaction #{value.transactionId}
+                  {strings.formatString(strings.dashboard.transactions['transaction-modal'].title, {id: value.transactionId})}
                   </Dialog.Title>
                   <div className="mt-2 text-left">
                     <p className="text-sm text-gray-500">
-                      <span className="font-bold">Date et heure de création</span>: {value.created_at}
+                      <span className="font-bold">{strings.dashboard.transactions['transaction-modal'].time}</span> {value.created_at}
                     </p>
                     <p className="text-sm text-gray-500">
-                      <span className="font-bold">Utilisateur id/pseudonyme</span>: {value.userId}/{value.username}
+                      <span className="font-bold">{strings.dashboard.transactions['transaction-modal'].userId}</span> {value.userId}/{value.username}
                     </p>
                     <p className="text-sm text-gray-500">
-                      <span className="font-bold">Expire le</span>: {value.expire_at}
+                      <span className="font-bold">{strings.dashboard.transactions['transaction-modal'].expire}</span> {value.expire_at}
                     </p>
                     <p className="text-sm text-gray-500">
-                      <span className="font-bold">Récupéré</span>: {(value.claimed?value.claimed_at:'Non')}
+                      <span className="font-bold">{strings.dashboard.transactions['transaction-modal'].claimed}</span> {(value.claimed?value.claimed_at:'Non')}
                     </p>
                     <p className="text-sm text-gray-500">
-                      <span className="font-bold">Paiement effectué par</span>: {value.provider}
+                      <span className="font-bold">{strings.dashboard.transactions['transaction-modal'].provider}</span> {value.provider}
                     </p>
                     <p className="text-sm text-gray-500">
-                      <span className="font-bold">Produit</span>: {value.product.name}
+                      <span className="font-bold">{strings.dashboard.transactions['transaction-modal'].product}</span> {value.product.name}
                     </p>
                     <p className="text-sm text-gray-500">
-                      <span className="font-bold">Montant</span>: {value.product.price} €
+                      <span className="font-bold">{strings.dashboard.transactions['transaction-modal'].price}</span> {value.product.price} €
                     </p>
                   </div>
                 </div>
@@ -184,7 +185,7 @@ if(data.length !== 0){
                   className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
                   onClick={() => setOpen(false)}
                 >
-                  Fermer
+                  {strings.dashboard.transactions['transaction-modal'].close}
                 </button>
               </div>
             </div>

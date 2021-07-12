@@ -10,9 +10,9 @@ import { LockClosedIcon, LightningBoltIcon, ChatAltIcon, ScaleIcon } from '@hero
 import axios from 'axios';
 import {apipath} from '../config.json';
 import Cookies from 'universal-cookie';
+import {strings} from '../translations/lang';
 
 function Front() {
-
   const [server, setServer] = useState(0);
   const [member, setMember] = useState(0);
   const [bannerMessage, setBannerMessage] = useState('');
@@ -21,6 +21,14 @@ function Front() {
   const [bannerLink, setBannerLink] = useState('');
   const [buttonMessage, setButtonMessage] = useState('');
   const cookies = new Cookies();
+
+  var lang;
+
+  if(strings._language === 'fr'){
+    lang = 'en';
+  } else {
+    lang = 'fr';
+  }
 
   useEffect(() => {
     const cookies = new Cookies();
@@ -49,50 +57,46 @@ function Front() {
     fetchDatas();
 }, []);
 
-
-
-
   const [bannerOpen, setBannerOpen] = useState(true);
 
   const features = [
     {
-      name: 'Sécurisé',
-      description: "Aucune information bancaire ne transite via nos comptes. Le paiement se fait du compte de l'utilisateur à votre compte Paypal directement. Et en prime, les cartes bancaires sont acceptées !",
+      name: strings.home_page.features[0].name,
+      description: strings.home_page.features[0].description,
       icon: LockClosedIcon,
     },
     {
-      name: 'Aucun frais cachés',
+      name: strings.home_page.features[1].name,
       description:
-        "Nous ne prenons aucun frais additionnels. Vous ne paierez que les frais de service engendrés par l'utilisation de Paypal.",
+      strings.home_page.features[1].description,
       icon: ScaleIcon,
     },
     {
-      name: 'Paiement instantanné',
+      name: strings.home_page.features[2].name,
       description:
-        "Dès que le paiement est effectué, l'utilisateur reçoit directement son rôle sur votre serveur.",
+      strings.home_page.features[2].description,
       icon: LightningBoltIcon,
     },
     {
-      name: "Alerte d'expiration",
+      name: strings.home_page.features[3].name,
       description:
-        "Le joueur reçoit une alerte par message privé dès que son rôle a expiré, l'invitant ainsi à le renoulever. Plus aucun oubli de possible !",
+      strings.home_page.features[3].description,
       icon: ChatAltIcon,
     },
   ]
 
   const navigation = [
-    { name: 'Documentation', href: 'https://doc.octorole.xyz' },
-    { name: 'Serveur Discord officiel', href: 'https://octorole.xyz/discord' },
-    { name: 'Status', href: 'http://status.octorole.xyz' },
+    { name: strings.home_page.navigation[0].name, href: 'https://doc.octorole.xyz' },
+    { name: strings.home_page.navigation[1].name, href: 'https://octorole.xyz/discord' },
+    { name: strings.home_page.navigation[2].name, href: 'http://status.octorole.xyz' },
   ]
 
   const footer = [
-    { name: 'CGV', href: '/legals/cgv' },
-    { name: 'CGU', href: '/legals/cgu' },
-    { name: 'Politique de confidentalités', href: '/legals/rgpd' },
-    { name: 'Mentions légales', href: '/legals' },
+    { name: strings.home_page.footer[1].name, href: '/legals/rgpd' },
+    { name: strings.home_page.footer[0].name, href: '/legals' },
   ]
 
+  
   return (
     <div>
       {/* banner */}
@@ -123,7 +127,7 @@ function Front() {
               type="button"
               className="-mr-1 flex p-2 rounded-md hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-white sm:-mr-2"
             >
-              <span className="sr-only">Fermer</span>
+              <span className="sr-only">{strings.miscellaneous.close}</span>
               <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
             </button>
           </div>
@@ -166,17 +170,25 @@ function Front() {
                           {item.name}
                         </a>
                       ))}
+                      <button
+                          onClick={() => {localStorage.setItem('lang', lang);window.location.reload()}}
+                          key={strings.miscellaneous.lang}
+                          className="text-base font-medium text-white hover:text-gray-300"
+                        >
+                          {strings.miscellaneous.lang}
+                        </button>
+                      
                     </div>
                   </div>
                   <div className="hidden md:flex md:items-center md:space-x-6">
                     <Link to="/dashboard" href="#" className="text-base font-medium text-white hover:text-gray-300">
-                      Panneau d'administration
+                      {strings.home_page.navigation[3].name}
                     </Link>
                     <Link to="/invite"
                       href="#"
                       className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700"
                     >
-                      Inviter octorole
+                      {strings.home_page.navigation[4].name}
                     </Link>
                   </div>
                 </nav>
@@ -208,7 +220,7 @@ function Front() {
                       </div>
                       <div className="-mr-2">
                         <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-600">
-                          <span className="sr-only">Fermer</span>
+                          <span className="sr-only">{strings.miscellaneous.close}</span>
                           <XIcon className="h-6 w-6" aria-hidden="true" />
                         </Popover.Button>
                       </div>
@@ -224,6 +236,13 @@ function Front() {
                             {item.name}
                           </a>
                         ))}
+                        <button
+                          onClick={() => {localStorage.setItem('lang', lang);window.location.reload()}}
+                          key={strings.miscellaneous.lang}
+                          className="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50"
+                        >
+                          {strings.miscellaneous.lang}
+                        </button>
                       </div>
                       <div className="mt-6 px-5">
                         <Link
@@ -231,13 +250,13 @@ function Front() {
                           href="#"
                           className="block text-center w-full py-3 px-4 rounded-md shadow bg-purple-600 text-white font-medium hover:bg-purple-700"
                         >
-                          Panneau d'administration
+                          {strings.home_page.navigation[3].name}
                         </Link>
                       </div>
                       <div className="mt-6 px-5">
                         <p className="text-center text-base font-medium text-gray-500">
                           <Link to="/invite" href="#" className="text-gray-900 hover:underline">
-                            Inviter octorole
+                          {strings.home_page.navigation[4].name}
                           </Link>
                         </p>
                       </div>
@@ -256,11 +275,11 @@ function Front() {
                 <div className="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-left lg:flex lg:items-center">
                   <div className="lg:py-24">
                     <h1 className="mt-4 text-4xl tracking-tight font-extrabold text-white sm:mt-5 sm:text-6xl lg:mt-6 xl:text-6xl">
-                      <span className="block">Rendre simple votre</span>
-                      <span className="block text-purple-400">boutique Discord.</span>
+                      <span className="block">{strings.home_page.hero.title}</span>
+                      <span className="block text-purple-400">{strings.home_page.hero.subtitle}</span>
                     </h1>
                     <div className="mt-4 sm:mt-8">
-                          <p className="text-xl tracking-tight font-extrabold text-white">Octorole contribue à <span className="text-purple-300">{server} serveurs</span>, portés par plus de <span className="text-purple-300">{member} membres</span>.</p>
+                          <p className="text-xl tracking-tight font-extrabold text-white">{strings.formatString(strings.home_page.hero.stats, {servers: <span className="text-purple-300">{server} {strings.home_page.hero.servers}</span>,members: <span className="text-purple-300">{member} {strings.home_page.hero.members}</span>,})}</p>
                     </div>
                   </div>
                 </div>
@@ -282,7 +301,7 @@ function Front() {
         <div className="relative lg:grid lg:grid-cols-3 lg:gap-x-8">
           <div className="lg:col-span-1">
             <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-              Pourquoi faire confiance à octorole ?
+              {strings.home_page.infos.title}
             </h2>
           </div>
           <dl className="mt-10 space-y-10 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-8 sm:gap-y-10 lg:mt-0 lg:col-span-2">
@@ -304,8 +323,8 @@ function Front() {
     <div className="bg-gray-900">
       <div className="max-w-7xl mx-auto text-center py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
         <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          <span className="block text-white">Prêt à vous lancer ?</span>
-          <span className="block text-purple-400">Rejoignez-nous dès maintenant.</span>
+          <span className="block text-white">{strings.home_page.cta.title}</span>
+          <span className="block text-purple-400">{strings.home_page.cta.subtitle}</span>
         </h2>
         <div className="mt-8 flex justify-center">
           <div className="inline-flex rounded-md shadow">
@@ -313,7 +332,7 @@ function Front() {
               href="https://doc.octorole.xyz"
               className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700"
             >
-              Lire la documentation
+              {strings.home_page.cta.documentation}
             </a>
           </div>
           <div className="ml-3 inline-flex">
@@ -321,7 +340,7 @@ function Front() {
               to="/invite"
               className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-purple-700 bg-purple-100 hover:bg-purple-200"
             >
-              Inviter octorole
+              {strings.home_page.cta.invite}
             </Link>
           </div>
         </div>
@@ -338,13 +357,13 @@ function Front() {
               </Link>
             </div>
           ))}
-          <div key="gérer mes cookies" className="px-5 py-2">
+          <div key={strings.home_page.footer[2].name} className="px-5 py-2">
               <button onClick={()=>window.Confirmic('ConsentManager:show')} className="text-base text-gray-500 hover:text-gray-300">
-                Gérer mes cookies
+                {strings.home_page.footer[2].name}
               </button>
             </div>
         </nav>
-        <p className="mt-8 text-center text-base text-gray-400">&copy; {new Date().getFullYear()} octorole. Tous droits réservés.</p>
+        <p className="mt-8 text-center text-base text-gray-400">&copy; {new Date().getFullYear()} octorole. {strings.home_page.footer[3].rights}</p>
       </div>
     </footer>
          {/* banner 

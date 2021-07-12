@@ -1,6 +1,7 @@
 import React from 'react';
 import Help from './header/Help';
 import UserMenu from './header/UserMenu';
+import {strings} from '../translations/lang';
 
 function Header({
   sidebarOpen,
@@ -28,7 +29,7 @@ function Header({
               </svg>
             </button>
             <div className="flex justify-between ml-2 lg:ml-0	">
-              <span className="sm:ml-2 lg:ml-0 text-md hidden sm:block">Octorole - Panel d'administration</span>
+              <span className="sm:ml-2 lg:ml-0 text-md hidden sm:block">Octorole - {strings.dashboard.title}</span>
             </div>
           </div>
 
