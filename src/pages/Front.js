@@ -13,6 +13,7 @@ import Cookies from 'universal-cookie';
 import {strings} from '../translations/lang';
 
 function Front() {
+  const [, setValue] = useState();
   const [server, setServer] = useState(0);
   const [member, setMember] = useState(0);
   const [bannerMessage, setBannerMessage] = useState('');
@@ -20,6 +21,7 @@ function Front() {
   const [isBanner, setIsBanner] = useState(false);
   const [bannerLink, setBannerLink] = useState('');
   const [buttonMessage, setButtonMessage] = useState('');
+  const [data, setData] = useState(null);
   const cookies = new Cookies();
 
   var lang;
@@ -42,10 +44,14 @@ function Front() {
           setServer(datas.servers);
           setMember(datas.members);
           setIsBanner(datas.bannerState);
-          setBannerMessage(datas.bannerMessage);
-          setBannerMessageShort(datas.bannerMessageShort);
+          const bannerMessage = 'bannerMessage_'+strings._language
+          const bannerMessageShort = 'bannerMessageShort_'+strings._language
+          const buttonMessage = 'buttonMessage_'+strings._language
+          setBannerMessage(datas[bannerMessage]);
+          setBannerMessageShort(datas[bannerMessageShort]);
           setBannerLink(datas.bannerLink);
-          setButtonMessage(datas.buttonMessage);
+          setButtonMessage(datas[buttonMessage]);
+          setData(datas);
           if(cookies.get('banner') == null || cookies.get('banner') === true){
           } else {
             setIsBanner(false);
@@ -95,6 +101,19 @@ function Front() {
     { name: strings.home_page.footer[1].name, href: '/legals/rgpd' },
     { name: strings.home_page.footer[0].name, href: '/legals' },
   ]
+
+  function reload(){
+    localStorage.setItem('lang', lang);
+    strings.setLanguage(localStorage.getItem('lang'));
+    setValue({})
+    const bannerMessage = 'bannerMessage_'+strings._language
+    const bannerMessageShort = 'bannerMessageShort_'+strings._language
+    const buttonMessage = 'buttonMessage_'+strings._language
+    setBannerMessage(data[bannerMessage]);
+    setBannerMessageShort(data[bannerMessageShort]);
+    setBannerLink(data.bannerLink);
+    setButtonMessage(data[buttonMessage]);
+  }
 
   
   return (
@@ -171,7 +190,7 @@ function Front() {
                         </a>
                       ))}
                       <button
-                          onClick={() => {localStorage.setItem('lang', lang);window.location.reload()}}
+                          onClick={() => {reload()}}
                           key={strings.miscellaneous.lang}
                           className="text-base font-medium text-white hover:text-gray-300"
                         >

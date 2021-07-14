@@ -14,6 +14,21 @@ function Server() {
     const [banner, setBanner] = useState(true);
     const [data, setData] = useState(null);
     const [highlighted, setHighlighted] = useState([]);
+    const [, setValue] = useState();
+
+    var lang;
+
+    if(strings._language === 'fr'){
+      lang = 'en';
+    } else {
+      lang = 'fr';
+    }
+
+    function reload(){
+      localStorage.setItem('lang', lang);
+      strings.setLanguage(localStorage.getItem('lang'));
+      setValue({})
+    }
 
     useEffect(() => {
         const fetchDatas = async () => {
@@ -67,6 +82,12 @@ function Server() {
                     
                   </div>
                   <div className="md:flex md:items-center md:space-x-6">
+                  <button 
+                      onClick={()=>reload()}
+                      className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-900 border-white hover:bg-gray-700"
+                    >
+                      {strings.miscellaneous.lang}
+                    </button>
                     <Link to="/"
                       href="#"
                       className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700"

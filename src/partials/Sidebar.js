@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import logo from  '../images/logo-without-text.png';
 import {strings} from '../translations/lang';
@@ -11,6 +11,8 @@ function Sidebar({
 }) {
 
   var lang;
+  const [, setValue] = useState();
+
 
   if(strings._language === 'fr'){
     lang = 'en';
@@ -152,7 +154,7 @@ function Sidebar({
 
                   {/* Lang */}
             <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0`}>
-              <button onClick={()=>{localStorage.setItem('lang', lang);window.location.reload()}} className={`block text-gray-200 hover:text-white transition duration-150`}>
+              <button onClick={()=>{localStorage.setItem('lang', lang);strings.setLanguage(localStorage.getItem('lang'));setValue({});}} className={`block text-gray-200 hover:text-white transition duration-150`}>
                 <div className="flex flex-grow">
                   <svg xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 h-6 w-6 mr-3 mt-2" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />

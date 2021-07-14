@@ -12,9 +12,24 @@ function Product() {
     const [loading, setLoading] = useState(true);
     const [discord, setDiscord] = useState(false);
     const [orderId, setOrderId] = useState(null);
+    const [, setValue] = useState();
 
     const location = useLocation();
     const id = location.pathname.split('/')[2];  
+
+    var lang;
+
+    if(strings._language === 'fr'){
+      lang = 'en';
+    } else {
+      lang = 'fr';
+    }
+
+    function reload(){
+      localStorage.setItem('lang', lang);
+      strings.setLanguage(localStorage.getItem('lang'));
+      setValue({})
+    }
 
     useEffect(() => {
         const fetchDatas = async () => {
@@ -125,6 +140,10 @@ function Product() {
       >
         {strings.shop.product.login}
       </button>}
+      <button 
+      className="mt-2 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-purple-600 border-purple-600 bg-white-600 hover:bg-purple-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+      onClick={()=>reload()} type="button">{strings.miscellaneous.lang}</button>
+
       <p className="mt-4">{strings.formatString(strings.shop.product.server, {server: data.server.name, id: data.server.guildId})}</p>
     </div>
   </div>
